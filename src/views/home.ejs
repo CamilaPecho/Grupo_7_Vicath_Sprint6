@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head", {titulo: "Vicath - Home"}) %> 
+<body>
+    <%- include("./partials/header") %>
+    <div class="slider">
+        <ul>
+            <li><img src="/images/agenda.jpg" alt=""></li>
+            <li><img src="/images/beneficio.jpg" alt=""></li>
+            <li><img src="/images/minnie.jpg" alt=""></li>
+            <li><img src="/images/posca.jpg" alt=""></li>
+        </ul>
+    </div> 
+    <main>
+        <section class="filtrado-contenedor">
+            <div class="filtrado">
+            <h3>Filtrar por:</h3>
+            <form action="/" method="get" class="filtrar-marca">
+                <div>
+                    <h4><label for="marcas"> Marcas <br></label></h4>
+                    <select name="marcas">
+                        <option value="marca">---marca---</option> 
+                        <option value="marca-1">marca 1</option> 
+                        <option value="marca-2">marca 2</option>
+                        <option value="marca-3">marca 3</option> 
+                        <option value="marca-4">marca 4</option> 
+                    </select> 
+                </div>
+                <div>
+                    <h4><label for="tipo-producto"> Tipo de producto <br></label></h4>
+                    <select name="tipo-producto">
+                        <option value="tipo">---tipo---</option> 
+                        <option value="tipo-1">tipo 1</option> 
+                        <option value="tipo-2">tipo 2</option>
+                        <option value="tipo-3">tipo 3</option> 
+                        <option value="tipo-4">tipo 3</option> 
+                    </select>
+                </div>
+                <div>
+                    <h4><label for="colores"> Color <br></label></h4>
+                    <select name="colores">
+                        <option value="color">---color---</option> 
+                        <option value="color-1">color 1</option> 
+                        <option value="color-2">color 2</option>
+                        <option value="color-3">color 3</option> 
+                        <option value="color-4">color 3</option> 
+                    </select>
+                </div>
+                <div>
+                    <h4><label for="modelo"> Modelo <br></label></h4>
+                    <select name="modelo">
+                        <option value="modelo">---modelo---</option> 
+                        <option value="modelo-1">modelo 1</option> 
+                        <option value="modelo-2">modelo 2</option>
+                        <option value="modelo-3">modelo 3</option> 
+                        <option value="modelo-4">modelo 3</option> 
+                    </select>
+                </div>
+                <div>
+                    <h4><label for="material"> Material <br></label></h4>
+                    <select name="material">
+                        <option value="material">---material---</option> 
+                        <option value="material-1">material 1</option> 
+                        <option value="material-2">material 2</option>
+                        <option value="material-3">material 3</option> 
+                        <option value="material-4">material 3</option> 
+                    </select>
+                </div>
+            </form>
+            </div>
+        </section>
+        <section class="productos">
+            <h3>Productos destacados</h3>
+            <div class="destacados">
+                <% for(producto of destacados){ %>
+                    <%- include("./products/article") %>
+                <% } %> 
+            </div>
+
+            <h3>Productos en oferta</h3>
+            <div class="ofertas">
+                <% for(producto of ofertas){ %>
+                    <%- include("./products/article") %>
+                <% } %> 
+            </div>
+
+            <h3>Productos en novedades</h3>
+            <div class="novedades">
+                <% for(producto of novedades){ %>
+                    <%- include("./products/article") %>
+                <% } %> 
+            </div>
+        </section>
+    </main>
+    <%- include("./partials/footer") %> 
+    
+</body>
+</html>

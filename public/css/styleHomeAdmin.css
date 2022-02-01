@@ -1,0 +1,252 @@
+* {
+    margin: 0px; /*centra todo*/
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #CEE5D0;
+    color: #536FFF;
+}
+
+/*----------------------HEADER----------------------*/
+
+/*logo - busqueda - iconos*/
+div.top-header{
+    background-color: #FF7070;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.contenedorEnlace
+{
+    display: flex;
+}
+
+.logo{
+    display: flex;
+    width: 15%;
+}
+
+.imagen-logo{
+    width: 45px;
+}
+
+.imagen-logo, .form-busqueda, .cart, .login, .darkmode
+{
+    align-self: center;
+    
+}
+
+.cart, .login, .darkmode{
+    width: 15%;
+}
+
+
+.iconosHeader {
+    display: none;
+    align-items: center;
+    width: 22%;
+    justify-content: space-evenly;
+}
+
+.iconH i {
+    color: #FED2AA;
+    font-size: 20px;
+}
+
+div.burger-menu{
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    padding: 6px;
+    margin: 5px 2px;
+    color: #FF7070;
+    background-color: #FED2AA;
+    border-radius: 5px;
+}
+
+.saludo i {
+    color: #FF7070;
+    font-size: 60px;;
+}
+/*-------------------MAIN-------------*/
+
+
+main{
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.formLogin
+{
+    margin: auto;
+    text-align: center;
+}
+
+.acciones {
+    margin: auto;
+    margin-top: 12px;
+    margin-bottom: 30px;
+}
+
+.formulariox {
+    width: 100%;
+    /* text-align: center; */
+    /* display: flex; */
+    flex-wrap: wrap;
+    /* justify-content: flex-start; */
+    /* justify-items: center; */
+}
+
+.accionesAdmin{
+    width: 90%;
+    margin: 10% auto;
+    padding: 10px;
+    background-color: #F3F0D7;
+    border-radius: 10px;
+}
+
+.cont-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+.botonHome {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    color: #F3F0D7;
+    padding: 10px;
+    background-color: #FF7070;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: -4px 4px 2px #b0b8ff;
+}
+/*----------------------Footer----------------------*/
+
+
+.imglogos {
+    width: 50%;
+    margin: auto;
+    
+}
+
+.imglogos {
+    width: 50%;
+}
+
+@media(min-width: 426px) {
+
+    .iconosHeader {
+        display: flex;
+        
+        width: 40%;
+    }
+
+
+    div.burger-menu{
+        display: none;
+    }
+
+
+    #iconCuenta{
+        position: relative;
+        cursor: pointer;
+    }
+    
+    .login_desplegable_header{
+        display: block;
+        text-align: center;
+        margin-bottom: 14px;
+    }
+    
+    .login_desplegable {
+        position: absolute;
+        right: -10px;
+        box-sizing: border-box;
+        
+        opacity: 0;
+        width: 150px;
+        background-color: white;
+        padding: 5px;
+        z-index: -2;
+        box-shadow: 0 3px 6px #B0B8FF;
+        transition: all 1s;
+    }
+    
+    .login_desplegable_perfil, .login_desplegable_modificar, .login_desplegable_cerrarSesion{
+        display:block;
+        text-align: left;  
+    }
+    
+    .inputCheck /*pa borrar ese feo checkbox*/{
+        position: absolute;
+        display: none;
+    }
+    
+    .inputCheck:checked + .login_desplegable{
+    
+        opacity: 1;
+        z-index: 10;
+    }
+
+    .formLogin
+    {
+        width: 100%;
+    }
+
+    .formulariox{
+        margin-top: 3s0px;
+    }
+    
+    .accionesAdmin{
+        width: 70%;
+    }
+}
+
+@media (min-width:769px){
+
+
+    .login_desplegable {
+        position: absolute;
+        right: -35px;
+        box-sizing: border-box;
+        
+        opacity: 0;
+        width: 186px;
+        background-color: white;
+        padding: 5px;
+        z-index: -2;
+        box-shadow: 0 3px 6px #b0b8ff;
+        transition: all 1s;
+    }
+
+    .iconosHeader
+    {
+        position: static;
+        width: 24%;
+    }
+
+    #iconCuenta
+    {
+        position: relative;
+    }
+
+    .formulariox{
+        margin-top: 20px;
+    }
+
+    .botonHome
+    {
+        max-width: 389px;
+    }
+
+    .accionesAdmin{
+        width: 50%;
+    }
+}

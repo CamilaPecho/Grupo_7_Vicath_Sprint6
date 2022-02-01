@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../partials/head", {titulo: "Agregar producto"}) %> 
+<body>
+    <%- include('../partials/header') %> 
+    <main class="createProduct">
+        <div class="contenedorCrear">
+        <form action="/products/create" method="POST" class="crear" enctype="multipart/form-data">
+            <h3>Crear Producto</h3>
+            <div>
+                <h4>Nombre Producto</h4>
+                <input class="dato" type="text" name="title" id="title" placeholder="Titulo" required> 
+            </div>
+            <div >
+                <h4>Imagen</h4>
+                <input class="imagen" type="file" name="image" id="image"  placeholder="imagen" multiple required>  
+            </div>
+            <div>
+                <h4>Descripcion</h4>
+                <textarea class="dato" name="description" cols="20" rows="5" id="description" placeholder="descripcion" required  ></textarea>
+            </div>
+            <div>
+                <h4>Precio</h4>
+                <input class="dato" type="number" name="price" id="price" placeholder="precio" required> 
+            </div>
+            <div >
+                <h4>Elegir Categoria</h4>
+                <select name="category">
+                    <option value="destacados">destacados</option> 
+                    <option value="novedades">novedades</option> 
+                    <option value="ofertas">ofertas</option>
+                </select>
+            </div>
+
+            <div class = "botones">
+                <button class= "botonCrear" type="submit"> crear </button>
+                <button class= "botonCancelar" type="reset"> cancelar </button>
+            </div>
+        </form>
+        </div>
+
+    </main>
+    <%- include('../partials/footer') %> 
+</body>
+</html>

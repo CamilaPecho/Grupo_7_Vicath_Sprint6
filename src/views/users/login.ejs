@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../partials/head", {titulo: "Login"}) %> 
+<body>
+    <%- include("../partials/header") %> 
+    <main class="main-Login">
+        <section class="formLogin">
+            <div class="saludo">
+                    <a href="#">
+                        <i class="fas fa-user-circle"></i> 
+                    </a>
+                    <h2>¡Bienvenido/a!</h2>
+            </div>
+            <div>
+            <form action="/login" method="post">
+                
+                <div>
+                    <h3> <label for="usuario">Usuario</label> </h3>
+                    <input type="email" name="usuario" id="usuario<%= (locals.errors && errors.usuario) ? 'Is-invalid': null %>" placeholder="Ingrese su email"
+                    value="<%= (locals.oldData) ? oldData.usuario: null %> ">
+                    <% if (locals.errors && errors.usuario) { %>
+                        <div class="errorValidacion">
+                            <%= errors.usuario.msg %> 
+                        </div> 
+                    <% } %>
+                    
+                </div>
+
+                <div>
+                    <h3> <label for="contraseña">Contraseña</label> </h3>
+                    <input type="password" name="contrasenia" id="contraseña<%= (locals.errors && errors.contrasenia) ? 'Is-invalid': null %>" placeholder="Ingrese su contraseña">
+                    <% if (locals.errors && errors.contrasenia) { %>
+                        <div class="errorValidacion">
+                            <%= errors.contrasenia.msg %> 
+                        </div> 
+                    <% } %>
+                </div>
+
+                <div class="texto">
+                    <label for="recordarme">
+                        <input type="checkbox" name="recordarme" id="recordarme" selected>
+                            Recordarme</label>
+                </div>
+                
+                <div class="send"> <button type="submit" class="buttonLogin">Ingresar</button>  
+                </div>
+
+                <div class="contraseña">
+                <a href="#">¿Olvidaste tu contraseña? </a>
+                </div>
+                <div class="registrate">
+                    <a href="/register">¿Sos nuevo usuario? Registrate</a>
+                </div>
+                <div class="ingresoA">
+                <a href="/">Ingresá con Google
+                    <img src="/images/google.svg" alt="" class="googleLogo">
+                </a>
+                
+                </div>
+                <div class="ingresoB">
+                <a  href="/">Ingresá con Facebook
+                    <img src="/images/facebook.svg" alt="" class="facebookLogo">
+                </a>
+                
+                </div>
+
+            </form>
+        </div>
+        </section>
+    </main>
+    <%- include("../partials/footer") %> 
+    
+</body>
+</html>

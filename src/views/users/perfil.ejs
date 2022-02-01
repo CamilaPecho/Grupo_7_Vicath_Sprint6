@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/30dc2d0760.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/perfil.css">
+    <link rel="stylesheet" href="/css/stylesHeader-Footer.css">
+    
+    <title>Perfil de usuario</title>
+</head>
+<body>
+  <%- include("../partials/header") %> 
+    <main>
+        <div class="contenedorFormularioPerfil">
+            <div class="formularioVista">
+              <div class="fondoVista">
+            <p class="parrafoPerfilInicio"><i class="fas fa-user-circle"></i> Perfil de usuario</p>
+            <form action="" class="formularioPerfil">
+                <div class="contenedorCampo"><label for="">Nombre: </label><input type="text" name="" id="" value="<%= usuarioDatos.nombre%>"></div>
+                <div class="contenedorCampo"><label for="">Apellido: </label><input type="text" name="" id="" value="<%= usuarioDatos.apellido%>"></div>
+                <div class="contenedorCampo"><label for="">Telefono: </label><input type="text" name="" id="" value="<%= usuarioDatos.telefono%>"></div>
+                <div class="contenedorCampo"><label for="">E-mail: </label><input type="text" name="" id="" value="<%= usuarioDatos.mail%>"></div>
+                <div class="contenedorBoton">
+                    <button type="button">Editar <i class="fas fa-edit"></i></button>
+                </div>
+            </form>
+            </div>
+            </div>
+
+            <div class="historialComprasOAFines">
+            <div class="historiaIndividial"> 
+            <p class="textoHistorial">Últimas compras realizadas</p>
+            <div class="contenedorHistorial">
+                <table class="tablaHistorial">
+                    <tbody>
+                      <tr>
+                        <td>Cartuchera</td>
+                        <td>$10000</td>
+                        <td>Fecha: 15/06/2000</td>
+                        <td><a href="">Ver más...</a></td>
+                      </tr>
+                      <tr>
+                        <td>Tijeras</td>
+                        <td>$3000</td>
+                        <td>Fecha: 14/06/2001</td>
+                        <td><a href="">Ver más...</a></td>
+                      </tr>
+                      <tr>
+                        <td>Hojas A4</td>
+                        <td>$500</td>
+                        <td>Fecha: 22/02/2010</td>
+                        <td><a href="">Ver más...</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+        </div>
+            
+        <div class="historiaIndividial">
+            <p class="textoHistorial">Últimas compras realizadas</p>
+            <div class="contenedorHistorial">
+                <table class="tablaHistorial">
+                    <tbody>
+                      <tr>
+                        <td>Cartuchera</td>
+                        <td>$10000</td>
+                        <td>Fecha: 15/06/2000</td>
+                        <td><a href="">Ver más...</a></td>
+                      </tr>
+                      <tr>
+                        <td>Tijeras</td>
+                        <td>$3000</td>
+                        <td>Fecha: 14/06/2001</td>
+                        <td><a href="">Ver más...</a></td>
+                      </tr>
+                      <tr>
+                        <td>Hojas A4</td>
+                        <td>$500</td>
+                        <td>Fecha: 22/02/2010</td>
+                        <td><a href="">Ver más...</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+            </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <%- include("../partials/footer") %>
+</body>
+</html>

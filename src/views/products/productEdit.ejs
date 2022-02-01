@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../partials/head", {titulo: "Editar producto"}) %> 
+<body>
+    <%- include('../partials/header') %> 
+    <main class="createProduct">
+        <div class="contenedorCrear">
+            <form action="/products/edit/<%= producto.id %>?_method=PUT" method="POST" class="crear" enctype="multipart/form-data">
+                <h3>Editar Producto</h3>
+                <div>
+                    <h4>Nombre Producto</h4>
+                    <input class="dato" type="text" name="title" id="title" value="<%= producto.title  %>" required>
+                </div>
+                <div >
+                    <h4>Imagen</h4>
+                    <input class="imagen" type="file" name="image" id="image" value="<%= producto.image[0]%>" multiple >
+                </div>
+                <div>
+                    <h4>Descripcion</h4>
+                    <textarea class="dato" name="description" cols="20" rows="5" id="description"  required ><%= producto.description  %></textarea>
+                </div>
+                <div>
+                    <h4>Precio</h4>
+                    <input class="dato" type="number" name="price" id="price" value="<%= producto.price  %>" required>
+                </div>
+                <div >
+                    <h4>Elegir Categoria</h4>
+                    <select name="category">
+                        <option value="destacados">destacados</option>
+                        <option value="novedades">novedades</option>
+                        <option value="ofertas">ofertas</option>
+                    </select>
+                </div>
+                <div class = "botones">
+                    <button class= "botonCrear" type="submit"> editar </button>
+                    <a href="/products/verProducts"><button class= "botonCancelar" type="button"> cancelar </button></a>
+                </div>
+            </form>
+        </div>
+
+    </main>
+    <%- include('../partials/footer') %> 
+</body>
+</html>

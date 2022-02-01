@@ -1,0 +1,241 @@
+
+/*-------------------carrusel-------------*/
+.slider{
+    display: none;
+}
+
+/*----------------------MAIN----------------------*/
+main{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*----------------------FILTRADO----------------------*/
+.filtrado-contenedor{
+    width: 25%;
+    padding: 10px;
+    display: none;
+}
+.filtrado{
+    padding: 20px;
+    background-color: #F3F0D7;
+    border-radius: 10px;
+}
+.filtrado div {
+    padding-top: 10px;
+}
+.filtrado div label{
+    padding-bottom: 10px;
+}
+.filtrado div select{
+    margin: 5px;
+    width: 100%;
+    border:0;
+    background-color: white;
+    padding: 6px;
+    border-radius: 10px;
+    color:#536FFF;
+}
+.filtrado div select option{
+    border:0;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+/*----------------productos------------*/
+
+.productos{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.productos h3{
+    padding: 10px;
+}
+main section article img{
+    width: 25%;
+}
+
+/*----------------destacados y ofertas------------*/
+
+.destacados, .ofertas, .novedades, .listadoProductos{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+article.articuloClass{
+    width: 90%;
+    margin: 5px auto;
+    
+    background-color: #F3F0D7;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.destacados img, .ofertas img, .novedades img, .listadoProductos img {
+    width: 100%;
+    border-radius: 10px;
+    /* object-fit: contain; */
+    display: block;
+}
+
+.main-article-principal h4{   
+    text-align: left;
+    font-size: 13px;
+}
+.main-article-principal p{
+    margin: 5px;
+    font-size: 12px;
+}
+.contenedor-precio {
+    display: flex;
+    justify-content: space-between;
+    width: 92%;
+    position: absolute;
+    left: 5px;
+    bottom: 7px;
+}
+.contenedor-precio p.precio, .contenedor-precio button{
+    margin: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px;
+}
+.contenedor-precio button{
+    border: 0;
+    border-radius: 15px;
+    background-color: #FF7070;
+    color: #F3F0D7;
+    display: flex;
+    align-items: center;
+}
+
+.contenedor-precio button i
+{
+    transition: all 1s ease;
+}
+/*--------adaptaciones------------*/
+
+.productos h3::after {
+    content: "";
+    position: absolute;
+    width: 51px;
+    height: 3px;
+    background-color: #ff7070;
+    left: 9px;
+    bottom: 7px;
+}
+
+.productos h3{
+    position: relative;
+}
+
+/*Error pág*/
+.errorPag h2
+{
+    text-align: center;
+    margin: 26px;
+}
+
+.errorPag .imagenError, .errorPag .audiox
+{
+    display: flex;
+    justify-content: center;
+}
+
+.contenedorGeneralFoot
+{
+    position:absolute;
+    left: 0px;
+    bottom: 0px;
+}
+@media(min-width: 361px) {
+
+    .productos{
+        margin: 3px auto;
+        flex-wrap: wrap;
+    }
+    .destacados, .ofertas, .novedades, .listadoProductos{
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    article.articuloClass{
+        width: 45%;
+    }
+}
+
+@media (min-width:769px){
+
+    .filtrado-contenedor{
+        width: 25%;
+        padding: 10px;
+        display: block;
+        margin: 5px;
+    }
+    .productos{
+        width: 70%;
+    }
+    article.articuloClass {
+        /* margin: 5px; */
+        width: 31%;
+        font-size: 15px;
+        /* border-radius: 128px; */
+        position: relative;
+        /* margin-bottom: 17px; */
+        padding-bottom: 40px;
+    }
+     article.articuloClass:hover{
+        box-shadow: -4px 4px 2px #B0B8FF;
+        width:33%;
+    }
+    .slider{
+        display: block;
+        width: 100%;
+        overflow: hidden;
+    }
+    .slider ul{
+        padding: 0;
+        display: flex;
+        width: 400%;
+        animation: cambiox 13s infinite alternate;
+    }
+    .slider li{
+        width: 100%;
+        list-style: none;
+    }
+    .slider img{
+        width: 100%;
+    }
+    
+    @keyframes cambiox{
+        0% {margin-left:0;}
+        20% {margin-left:0;}
+        /*se tarda 1 seg en una imagen a otra 20x0.05*/
+        25% {margin-left:-100%;}
+        45% {margin-left:-100%;}
+    
+        50% {margin-left:-200%;}
+        70% {margin-left:-200%;}
+    
+        75% {margin-left:-300%;}
+        100% {margin-left:-300%;}
+    }
+
+    .main-article-principal {
+        /* display: block; */
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 9px 13px;
+        /* height: 100%; */
+        /* transform: translateY(10px); */
+    }
+
+
+
+    /*transicion carrito*/
+    .contenedor-precio button:hover i
+    {
+        transform: rotateX(180deg)
+    }
+}

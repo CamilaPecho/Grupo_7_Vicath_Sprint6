@@ -1,0 +1,13 @@
+<article class="articuloClass">
+    <a href="/products/productDetail/<%= producto.id %>">
+        <img src= "/images/<%= producto.image[0] %>"  class="imagenProducto" >
+    </a>
+    <div class="main-article-principal">
+        <h4><%= producto.title %> </h4>
+        <p><%= producto.description %></p>
+        <div class="contenedor-precio">
+            <p class="precio">$<%= producto.price %> </p>
+            <button><span style="font-size: 14px">Agregar</span><i class="fas fa-cart-plus"></i></button>
+        </div>
+    </div>
+</article>

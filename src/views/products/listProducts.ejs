@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../partials/head", {titulo: "Todos los productos"}) %> 
+<body>
+    <%- include('../partials/header') %> 
+    <main class="listProducts">
+        <div class="contenedorCrearPorducto">
+            <a href="/products/create"><button class="crearProducto">Crear Producto</button></a>
+        </div>
+        <div class="filtradoLista">
+            <form action="/" method="get" class="elegirfiltrado">
+                <h4>Filtrar:</h4>
+                <div>
+                    <select name="categorias">
+                        <option value="categoria-1">categoria 1</option> 
+                        <option value="categoria-2">categoria 2</option>
+                        <option value="categoria-3">categoria 3</option>
+                    </select> 
+                </div>
+            </form>
+        </div>
+        <div class="tabla">
+            <table>
+                <tr>
+                    <th id="nombre">Nombre Producto</th>
+                    <th id="descripcion">Descripcion</th>
+                    <th id="precio">Precio</th>
+                    <th id="categoria">Categoria</th>
+                </tr>
+                
+                <% for(let producto of productos){%>
+                <tr>
+                    <td id="nombre"> <%= producto.title %> </td>
+                    <td id="descripcion"> <%= producto.description %> </td>
+                    <td id="precio"> <%= producto.price %> </td>
+                    <td id="categoria"> <%= producto.category %> </td>
+                    <td>
+                        <a href="/products/edit/<%= producto.id %>"> <button class="botonEditar" type="submit"> editar </button></a>
+                    </td>
+                    <td>
+                        <form action="/products/delete/<%= producto.id %>?_method=DELETE" method="POST">
+                            <button class="botonEliminar" type="submit"> eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+            </table>
+        </div>
+    </main>
+    <%- include('../partials/footer') %> 
+</body>
+</html>

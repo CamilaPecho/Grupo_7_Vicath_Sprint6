@@ -1,0 +1,194 @@
+/*------REGISTRO------*/
+
+.register {
+    width: 100%;
+    display: block; /*flex en desk*/
+    padding: 20px;
+    justify-content: space-around;
+    margin:auto
+}
+
+.continuar div input.dato{
+    border:0;
+    padding: 10px;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: -4px 4px 2px #B0B8FF;
+}
+
+.continuar div{
+    padding: 10px;
+    text-align: left;
+}
+
+.register div form h3{
+    padding: 10px;
+    color: #536FFF;
+}
+
+.continuar h4{
+    padding: 10px;
+    color: #536FFF;
+}
+
+.register div{
+    width: 100%;
+    padding: 10px;
+}
+
+.register div form.continuar{
+    background-color: #F3F0D7;
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.continuar div.otrasOpciones{
+    display: flex;
+    justify-content: space-around;
+}
+
+.continuar div.botones{
+    display: flex;
+    justify-content: space-around;
+}
+
+button.botonRegistro{
+    justify-content: space-around;
+    width:45%;
+    font-size: 20px;
+    color: #F3F0D7;
+    padding: 10px;
+    background-color:#FF7070;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: -4px 4px 2px #B0B8FF;
+}
+
+button.google{
+    width: 90%;
+    font-size: 15px;
+    padding: 10px;
+    background-color:white;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: -4px 4px 2px #B0B8FF;
+}
+
+button.google i{
+    padding-left: 10px;
+    color: red;
+}
+
+button.facebook{
+    width: 90%;
+    font-size: 15px;
+    padding: 10px;
+    background-color:#0044AA;
+    border: 0;
+    border-radius: 20px;
+    color: #F3F0D7;
+    box-shadow: -4px 4px 2px #B0B8FF;
+}
+
+button.facebook i{
+    padding-left: 5px;
+    color: #F3F0D7;
+}
+.imagen-fondo {
+    display: none;
+}
+
+.ingresoA a, .ingresoB a{
+
+    margin: 3% 0px;
+    border: none;
+    border-radius: 30px;
+    width: 100%;
+    padding: 10px;
+    /*padding: 10px;*/
+    box-shadow: -4px 4px 2px #B0B8FF;
+    display: block;
+    
+    background-color: #ffffff;
+    font-size: 15px;
+}
+
+.ingresoA a, .ingresoB a{
+    text-decoration: none;
+    position: relative;
+}
+
+.googleLogo, .facebookLogo {
+    position: absolute;
+    width: 24px;
+    top: 19%;
+    right: 11%;
+}
+
+.ingresoB a
+{
+    background-color: #0044AA;
+    color: #FFF;
+}
+
+/*-----------adaptaciones ----------*/
+
+@media (min-width:426px){
+
+    .register{
+        width: 80%;
+    }
+
+    .ingresoB a::after, .ingresoA a::after {
+        content: "";
+        width: 0.3px;
+        height: 24px;
+        position: absolute;
+        top: 8px;
+        right: 27%;
+        background: #868986;
+    }
+}
+
+@media (min-width:769px){
+
+    .register {
+        display: flex; 
+        width: 100%;
+        
+    }
+    .imagen-fondo {
+        display: block;
+        width: 100%;
+        border-radius: 20px;
+        margin-top: 21px;
+    }
+    .imagen-fondo-dark {
+        display: none;
+    }
+
+    form .ingresoA, form .ingresoB
+    {
+        width: 264px;
+        margin: auto;
+    }
+
+    .ingresoA a::after, .ingresoB a::after {
+        content: "";
+        width: 0.3px;
+        height: 24px;
+        position: absolute;
+        top: 7.5px;
+        right: 18%;
+        background: #868986;
+    }
+
+    .googleLogo, .facebookLogo {
+        position: absolute;
+        width: 17px;
+        top: 29%;
+        right: 5%;
+    }
+
+    
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head", {titulo: "Carrito"})  %> 
+<body class="bodyCarrito">
+    <%- include("../partials/header") %>
+    <main class="mainCarrito">
+        <section class="datosPago">
+            <div class="contenedor-datosPago">
+            <div class="formulario">
+            <form action="#" method="post">
+                <div class="contenedor-form-general">
+                <label for="" class="descripcion-campo">Datos de contacto:</label>
+                <div class="form-container">
+                <input type="text" name="nombre" class="campo" id="inputCampo" placeholder="Nombre:">
+                </div>
+
+                <div class="form-container">
+                <input type="text" name="apellido" class="campo" id="inputCampo" placeholder="Apellido:">
+                </div>
+
+                <div class="form-container">
+                    <input type="email" name="mail" class="campo" id="inputCampo" placeholder="Correo electrónico:">
+                </div>
+
+                <div class="form-container">
+                    <input type="text" name="tel"class="campo" id="inputCampo" placeholder="Teléfono:">
+                    </div>
+                </div>
+
+                <div class="contenedor-form-general">
+                    <label for="" class="descripcion-campo">Entrega:</label>
+                    <div class="form-container">
+                    <label for=""><input type="radio" name="entrega" class="campo" value="value">Correo Argentino - Envio a domicilio $500</label>
+                    </div>
+                </div>
+                    
+                <div class="contenedor-form-general">
+                    <label for="" class="descripcion-campo">Datos del destinatario:</label>
+                    <div class="form-container">
+                        <input type="text" class="campo" name="nombredest" id="inputCampo" placeholder="Nombre:">
+                    </div>
+        
+                    <div class="form-container">
+                        <input type="text" class="campo" name="apellidodest" id="inputCampo" placeholder="Apellido:">
+                    </div>
+        
+                    <div class="form-container">
+                            <input type="text" class="campo" name="dni" id="inputCampo" placeholder="DNI:">
+                    </div>
+        
+                    <div class="form-container">
+                            <input type="text" class="campo"  id="inputCampo" name="teldest" placeholder="Teléfono:">
+                    </div>
+
+                    <div class="form-container">
+                        <input type="text" name="calle" class="campo" id="inputCampoNox" placeholder="Calle:">
+                        <input type="text" name="ncalle" class="campo" id="inputCampoNox" placeholder="Nº:">
+                        <input type="text" name="depto" class="campo" id="inputCampoNox" placeholder="Departamento:">
+                    </div>
+
+                    <div class="form-container">
+                        <input type="text" name="localidad" class="campo" id="inputCampoNox" placeholder="Localidad:">
+                        <input type="text" name="CPA" class="campo" id="inputCampoNox" placeholder="Código postal:">
+                        <input type="text" name="pvincia" class="campo" id="inputCampoNox" placeholder="Provincia:">
+                    </div>
+                </div>
+                
+                <div class="contenedor-form-general">
+                    <label for="" class="descripcion-campo">Datos de facturación:</label>
+                    <div class="form-container">
+                    <input type="text" name="dnifact" class="campo" id="inputCampo" placeholder="DNI/CUIL">
+                    </div>
+                    <div class="form-container">
+                        <label for=""><input type="checkbox" name="confdatos" class="campo">Mis datos de facturación y entrega son los mismos</label>
+                        </div>
+                </div>
+
+                <div class="contenedor-form-general">
+                    <label for="" class="descripcion-campo">Medio de pago:</label>
+                    <div class="medPagoCont">
+                    <div class="form-container">
+                    <button type="button" class="butonMedioPago"><i class="fas fa-credit-card"></i> Tarjeta de crédito ó débito</button>
+                    </div>
+    
+                    <div class="form-container">
+                    <button type="button" class="butonMedioPago"><i class="fas fa-money-bill"></i> Rapipago ó Pagofacil</button>
+                    </div>
+    
+                    <div class="form-container">
+                        <button type="button" class="butonMedioPago"><i class="fas fa-university"></i> Transferencia bancaria</button>
+                    </div>
+                    </div>
+                    
+                    <div class="realizarPedido">
+                        <button type="submit" class="enviarPedido">Realizar pedido</button>
+                        </div>
+                    
+                </div>
+            </form>
+            </div>
+        </div>
+        </section>
+        
+        <section class="resumen">
+            <div class="contenedor-resumen">
+            <div class="section-top-resumen">
+            <h3 class="tituloh3">Resumen del pedido</h3>
+        <article class="articleResumen">
+            <img src="../images/hojas.jpg" alt="hoja" class="product_img">
+            
+            <div class="main-article">
+                <div class="nomPrecio">
+                
+                <h3 class="precio">$2021</h3>
+            </div>
+            <div class="interaccion">
+                <h3 class="cant"><i class="fas fa-plus"></i>  4  <i class="fas fa-minus"></i></h3>
+                <h3 class="eliminar">Eliminar <i class="fas fa-trash"></i></h3>
+            </div>
+            <div class="descripcionwe">
+                <p class="detalle">24 hojas blancas</p>
+                <p class="cantidad">4 unidades</p>
+            </div>
+            </div>
+        </article>
+        <hr>
+        <article class="articleResumen">
+            <img src="../images/lapicera.jpg" alt="lapicera" class="product_img">
+            
+            <div class="main-article">
+                <div class="nomPrecio">
+                <h3 class="precio">$911</h3>
+                </div>
+
+                <div class="interaccion">
+                    <h3 class="cant"><i class="fas fa-plus"></i> 10 <i class="fas fa-minus"></i></h3>
+                <h3 class="eliminar">Eliminar <i class="fas fa-trash"></i></h3>
+                </div>
+                <div class="descripcionwe">
+                    <p class="detalle">5 lapiceras bic</p>
+                    <p class="cantidad">10 unidades</p>
+                </div>
+            </div>
+        </article>
+        </div>
+
+        <div class="section-middle-resumen">
+            <p class="subtotal">Subtotal: $2222</p>
+            <p class="costoEnvio">Costo de envio: $500</p>
+        </div>
+
+        <div class="section-bottom-resumen">
+            <h3>TOTAL: $10000</h3>
+            <div class="descuento">
+                <a href="#"><i class="fas fa-piggy-bank"></i> ¿Tenés un cupón de descuento?</a>
+            </div>
+        </div>
+        </div>
+        </section>
+    </main>
+
+    <%- include("../partials/footer") %>
+    
+</body>
+</html>

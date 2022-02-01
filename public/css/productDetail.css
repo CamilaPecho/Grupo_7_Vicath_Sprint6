@@ -1,0 +1,463 @@
+/*--------------MAIN----------------*/
+
+/*------------producto----------*/
+
+.producto{
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #F3F0D7;
+    border-radius: 10px;
+}
+
+
+
+
+.producto img {
+    width: 100%;
+    padding: 5px;
+}
+
+
+
+.contenedor-precio button{
+    border: 0;
+    border-radius: 15px;
+    background-color: #FF7070;
+    color: #F3F0D7;
+    margin: 5px;
+    font-size: 20px;
+    padding: 5px;
+}
+
+
+/*--------Nuevo Producto (padre e 3 hijos)----*/
+.tituloP
+{
+margin-bottom: 8px;
+font-weight: 600;
+
+}
+
+.precioP
+{
+color: green;
+font-size: 23px;
+font-weight: bold;
+}
+
+
+.imagenesProdContenedor
+{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.imagen-producto {
+    width: 100%;
+}
+
+
+.imagen-producto-hijas {
+    width: 100%;
+    display: flex;
+}
+
+.descripcionTotalProducto /*activar en version PC*/
+{
+    display: none;
+}
+
+.cantidadYPromocion {
+    display: flex;
+    margin-top: 12px;
+    justify-content: space-between;
+    width: 100%;
+}
+.cantidadInput {
+    width: 18%;
+    border: none;
+    border-radius: 30px;
+    box-shadow: -4px 4px 2px #b0b8ff;
+    background-color: #ffffff;
+    
+}
+
+.compartir
+{
+margin-top: 12px;
+}
+.descuentoYPedido {
+    display: flex;
+    margin-top: 12px;
+    justify-content: space-between;
+    width: 100%;
+}
+.descuento {
+    display: flex;
+    text-align: end;
+    width: 50%;
+    font-size: 12px;
+}
+
+.descuentoInput {
+    width: 41%;
+    
+    margin-left: 10px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: -4px 4px 2px #b0b8ff;
+    background-color: #ffffff;
+    
+}
+
+.carrito
+{
+    text-align: center;
+    margin-top: 12px;
+}
+
+div.cantidad {
+    width: 40%;
+}
+.botonDetalle
+{
+    color: #F3F0D7;
+    padding: 5px;
+    background-color: #FF7070;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: -4px 4px 2px #b0b8ff;
+}
+
+
+
+/*-----productos relacionados-----*/
+
+.productos-relacionados{
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #F3F0D7;
+    border-radius: 10px;
+}
+
+.productos-relacionados article{
+    padding: 10px;
+    text-align: center;
+}
+
+.productos-relacionados article h3{
+    padding: 5px;
+    text-align: left;
+}
+
+.productos-relacionados img{
+    width: 70%;
+}
+
+.articulos
+{
+    display: flex;
+}
+
+.tituloProd
+{
+    font-size: 8px;
+}
+
+/* --------Productos similares----------*/
+.productos-similares{
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #F3F0D7;
+    border-radius: 10px;
+}
+
+.productos-similares article{
+    padding: 10px;
+    text-align: center;
+}
+
+.productos-similares article h3{
+    padding: 5px;
+    text-align: left;
+}
+
+.productos-similares img{
+    width: 70%;
+}
+
+/*-----------adaptaciones ----------*/
+
+@media (min-width:361px){
+
+    .producto{
+        width: 90%;
+        margin: 10px auto;
+        padding: 10px;
+        background-color: #F3F0D7;
+        border-radius: 10px;
+    }
+
+    .imagen-producto {
+        width: 100%;
+        text-align: center;
+    }
+
+    .imagen-producto-hijas {
+        width: 100%;
+        display: flex;
+        text-align: center;
+    }
+
+    .producto img {
+        width: 70%;
+        padding: 5px;
+    }
+
+}
+
+@media (min-width:769px){
+
+    .imagen-producto, .imagen-producto-hijas{
+        max-width: none;
+    }
+
+    .producto{
+        display: flex;
+    }
+
+    .productos-relacionados div.articulos{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .productos-similares div.articulos{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .articulos article{
+        width: 25%;
+    }
+
+    .producto
+    {
+        width: 90%;
+    }
+
+    .descuentoYPedido
+    {
+        display: none;
+    }
+
+    .tituloYPrecio
+    {
+        display: none;
+    }
+
+    .textoDescuento
+    {
+        color: #000;
+        font-size: 12px;
+    }
+
+    .imagen-producto {
+        width: 70%;
+    }
+    .imagen-producto-hijas {
+        width: 30%;
+        display: flex;
+        order: -1;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .prodHija{
+        width: 75%;
+    }
+
+
+
+
+/*---------------Segunda sección (aca va el titulo precio,etc)*/
+    .imagenesProdContenedor { /*para que sean mitades*/
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    }
+
+    .descripcionTotalProducto
+    {
+    display: block;
+    width: 50%;
+    padding: 25px;
+    flex-wrap: wrap;
+    }
+
+    .titulo {
+        font-size: 20px;
+    }
+
+    .precio {
+        color: green;
+        margin-bottom: 25px;
+        font-size: 20px;
+        font-weight: 800;
+    }
+
+    .descuentoPC {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 14px;
+    }
+
+    .descuentoInput {
+        width: 41%;
+        text-align: center;
+    }
+
+    .pedidoPC
+    {
+        margin-top: 60px;
+    }
+    .Pedido2
+    {
+        text-align: center;
+    }
+
+    .bttonEnvio
+    {
+        color: #F3F0D7;
+        background-color:#FF7070;
+        border: 0;
+        border-radius: 10px;
+        box-shadow: -4px 4px 2px #B0B8FF;
+        padding: 9px;
+    }
+
+    .detallesDelProducto
+    {
+        width: 100%;
+    }
+
+    .cantidadYPromocion
+    {
+        display: none;
+    }
+    .cantidadYPromocionPC {
+        display: flex;
+        margin-top: 12px;
+        width: 100%;
+    }
+
+    div.cantidad {
+        width: 40%;
+    }
+
+    .cantidadInput {
+        width: 32%;
+        border: none;
+        border-radius: 30px;
+        box-shadow: -4px 4px 2px #b0b8ff;
+        background-color: #ffffff;
+        margin-left: 7px;
+        padding: 7px 0px;
+        text-align: center;
+    }
+
+    .imagenMediosPagoCont
+    {
+        width: 100%;
+        margin-top: 11px;
+    }
+    
+    .descuento {
+        display: flex;
+        text-align: end;
+        width: 60%;
+        font-size: 12px;
+    }
+    .pedidoPC {
+        margin-top: 25px;
+    }
+    .bttonEnvio {
+        color: #F3F0D7;
+        background-color: #FF7070;
+        border: 0;
+        border-radius: 10px;
+        box-shadow: -4px 4px 2px #b0b8ff;
+        padding: 9px;
+        width: 82%;
+    }
+
+    #disclaimer
+    {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .producto img{
+        width: 100%;
+        padding: 5px;
+    }
+
+    .imagen-producto {
+        
+        text-align: left;
+    }
+
+
+
+/*Botom compartir*/
+    #btn-mas
+    {
+        display: none;
+    }
+
+    .contenedor-redes
+    {
+       display: flex;
+    }
+
+    .redes a{
+        display: flex;
+        flex-direction: row;
+        text-decoration: none;
+        background: #FF7070;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        margin-right: -15px;
+        opacity: 0;
+        visibility: hidden;
+        justify-content: center;
+        align-items: center;
+        transition: all 500ms ease;
+    }
+
+    #btn-mas:checked+ .redes a{
+        margin-right: 10px;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .redes
+    {
+        display: flex;
+    }
+
+    .compartir
+    {
+        order: -1;
+        margin-right: 16px;
+        cursor: pointer;
+    }
+
+    .iconFace img, .iconIg img, .iconLk img{
+        width: 46px;
+    }
+}

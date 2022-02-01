@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vicath - Libreria</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet" href="/css/styleHomeAdmin.css">
+    </head>
+<body>
+    <header>
+        <div class="top-header">
+        <div class= "logo">
+            <a href="/" class="contenedorEnlace"><img class="imagen-logo" src="../images/logo.png" alt="Logo de pagina"></a>
+        </div>
+        
+        <div class="iconosHeader">
+        <div class="iconH" id="iconCuenta">
+            <label  for="clickk">
+                <i class="fas fa-user-circle"></i> Administrador
+            </label>
+            <input type="checkbox" class="inputCheck" id="clickk">
+            <div class="login_desplegable">
+                <a href="/login" class="login_desplegable_perfil">Ver perfil <i class="fas fa-eye" style="user-select: auto;"></i></a>
+                <a href="/login" class="login_desplegable_modificar">Modificar datos <i class="fas fa-shield-alt" style="user-select: auto;"></i></a>
+                <a href="/register" class="login_desplegable_cerrarSesion">Cerrar sesión <i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+        
+        </div>
+        <div class="burger-menu">
+            <i class="fa fa-bars burger"></i>
+        </div>
+        </div>
+        
+    </header>
+    <main>
+        <div class="accionesAdmin">
+            <section class="formLogin">
+            <div class="saludo">
+                    <a href="#">
+                        <i class="fas fa-user-circle"></i> 
+                    </a>
+                    <h2>¡Bienvenido/a!</h2>
+            </div>
+        </section>
+        <p class="acciones">Elija que acción desea realizar:</p>
+        
+            <div class="cont-button">
+                <a href="/products/verProducts">
+                  <button type="button" class="botonHome">Ver listado de productos</button>  
+                </a>
+            </div>
+            <div class="cont-button">
+                <a href="/products/create">
+                    <button type="button" class="botonHome">Agregar nuevo producto</button>
+                </a>
+            </div>
+            <div class="cont-button">
+                <a href="/">
+                    <button type="button" class="botonHome">Iniciar vista cliente</button>
+                </a>
+            </div>
+
+        </div>
+        
+    </main>
+    
+</body>
+</html>

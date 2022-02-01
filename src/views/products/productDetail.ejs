@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Detalle del producto</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet" href="/css/stylesHeader-Footer.css">
+        <link rel="stylesheet" href="/css/productDetail.css">
+        <link rel="icon" href="/images/logoIcon.ico">
+        
+    </head>
+    <body>
+        <%- include('../partials/header') %> 
+        <main>
+            <section class="producto">
+                <div class="tituloYPrecio">
+                    <p class="tituloP"><%= detailProd.title %></p>
+                    <p class="precioP"><%= detailProd.price %></p>
+                </div>
+                <div class="imagenesProdContenedor">
+                
+                <div class="imagen-producto">
+                    <img src="/images/<%= detailProd.image[0] %>" class="cartuchera">
+                </div>
+                
+                <div class="imagen-producto-hijas">
+                    <% for( let i = 1; i < (detailProd.image).length; i++ ) { %>
+                        <div class="prodHija"><img src="/images/<%= detailProd.image[i] %>"  alt=""></div>
+                    <% } %>
+                </div>
+                
+                <div class="detallesDelProducto">
+                <div class="cantidadYPromocion">
+                    <div class="cantidad">
+                    <label for="">Cantidad: 
+                    <input type="number" class="cantidadInput" minlength="0" maxlength="15">
+                    </label>
+                    </div>
+
+                    <div class="descuento">
+                        <label for="">¿Tenés un código de descuento? <i class="fas fa-piggy-bank"></i></label>
+                        <input type="text" class="descuentoInput" placeholder="">
+                    </div>
+
+                    
+                </div>
+
+                
+                    
+                    <div class="contenedor-redes">
+                        <input type="checkbox" id="btn-mas">
+                        <div class="redes">
+                            <a href="" class="iconFace"><img src="/images/facebook-logo.png" alt=""></a>
+                            <a href="" class="iconIg"><img src="/images/instagram-logo.png" alt=""></a>
+                            <a href="" class="iconLk"><img src="/images/linkedin-logo.png" alt=""></a>
+                        </div>
+                        <div class="compartir">
+                           <label for="btn-mas"><i class="fas fa-share-alt"></i> Compartir</label> 
+                        </div>
+                    </div>
+                
+                <div class="carrito">
+                    <button type="button" class="botonDetalle"><i class="fas fa-cart-plus"></i> Agregar a carrito</button>  
+                </div>
+
+                </div>
+            </div>
+                <div class="descripcionTotalProducto">
+                    <h4 class="titulo"><%= detailProd.title %></h4> 
+                    <p class="precio"><%= detailProd.price %></p>
+                    <p class="descripcion">
+                    Descripcion: <%= detailProd.description %> 
+                    </p>
+                    <div class="cantidadYPromocionPC">
+                        <div class="cantidad">
+                        <label for="">Cantidad: 
+                        <input type="number" class="cantidadInput" minlength="0" maxlength="15">
+                       
+                        </label>
+                        </div>
+    
+                        <div class="descuento">
+                            <label for="">¿Tenés código de descuento? <i class="fas fa-piggy-bank"></i></label>
+                            <input type="text" class="descuentoInput" placeholder="">
+                        </div>
+    
+                        
+                    </div>
+                    <div class="imagenMediosPagoCont">
+                        <img src="/images/mediospago.jpg" alt="" class="imagenMP">
+                    </div>
+                    <div class="pedidoPC">
+                        <div class="Pedido2">
+                            <button type="button" class="bttonEnvio"><i class="fas fa-truck"></i> Calcular envio</button>
+                        </div>
+                    </div>
+                    <p id="disclaimer" style="color:#666; font-size: 11px;"><span style="color: #39b54a"><i class="fas fa-clipboard-check"></i> Compra protegida</span>, recibí el producto o te <a href="terminos">devolvemos tu dinero</a>.</p>
+                
+            </div>
+            </section>
+            <section class="productos-relacionados">
+                <div>
+                   <h4>Productos Relacionados</h4> 
+                </div>
+                <div class="articulos">
+                <article class="prod-relacionado">
+                    <div >
+                        <img src="/images/cartuchera.jpg" class="cartuchera">
+                    </div>
+                    <div class="tituloProd">
+                       <h3>Titulo producto</h3> 
+                    </div>
+                </article>
+                <article class="prod-relacionado">
+                    <div >
+                        <img src="/images/marcadores.jpg" class="marcadores">
+                    </div>
+                    <div class="tituloProd">
+                       <h3>Titulo producto</h3> 
+                    </div>
+                </article>
+                <article class="prod-relacionado">
+                    <div >
+                        <img src="/images/marcadoresPastel.jpg" class="pasteles">
+                    </div>
+                    <div class="tituloProd">
+                       <h3>Titulo producto</h3> 
+                    </div>
+                </article>
+                <article class="prod-relacionado">
+                    <div >
+                        <img src="/images/tijeras.jpg" class="tijeras">
+                    </div>
+                    <div class="tituloProd">
+                       <h3>Titulo producto</h3> 
+                    </div>
+                </article>
+                </div>
+            </section>
+
+            <section class="productos-similares">
+                <div>
+                   <h4>Productos similares</h4> 
+                </div>
+                <div class="articulos">
+                <article class="prod-similar">
+                    <div >
+                        <img src="/images/cartuchera.jpg" class="cartuchera">
+                    </div>
+                    <div class="tituloProd">
+                       <h3>Titulo producto</h3> 
+                    </div>
+                </article>
+                <article class="prod-similar">
+                    <div >
+                        <img src="/images/marcadores.jpg" class="marcadores">
+                    </div>
+                    <div class="tituloProd">
+                       <h3>Titulo producto</h3> 
+                    </div>
+                </article>
+                <article class="prod-similar">
+                    <div >
+                        <img src="/images/marcadoresPastel.jpg" class="pasteles">
+                    </div>
+                    <div class="tituloProd">
+                       <h3>Titulo producto</h3> 
+                    </div>
+                </article>
+                <article class="prod-similar">
+                    <div >
+                        <img src="/images/tijeras.jpg" class="tijeras">
+                    </div>
+                    <div class="tituloProd">
+                       <h3>Titulo producto</h3> 
+                    </div>
+                </article>
+                </div>
+            </section>
+        </main>
+        <%- include('../partials/footer') %> 
+    </body>
+</html>

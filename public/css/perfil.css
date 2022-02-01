@@ -1,0 +1,156 @@
+/*------------Mobile---------------*/
+
+*
+{
+    box-sizing: border-box;
+    margin: 0;
+
+}
+
+body
+{
+    background-color: #CEE5D0;
+}
+
+.contenedorFormularioPerfil
+{
+    padding: 6px;
+    justify-content: left;
+    
+}
+
+.contenedorCampo
+{
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.contenedorCampo label
+{
+    display: flex;
+    align-items: center;
+    width: 79px;
+}
+
+.contenedorCampo input
+{
+    border: 0;
+    padding: 10px;
+    width: 51%;
+    border-radius: 15px;
+    box-shadow: -4px 4px 2px #b0b8ff;
+
+}
+
+.contenedorBoton
+{
+    display: flex;
+    justify-content: center;
+}
+
+.contenedorBoton button
+{
+    font-size: 20px;
+    color: #F3F0D7;
+    padding: 10px;
+    background-color: #FF7070;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: -4px 4px 2px #b0b8ff
+}
+
+.textoHistorial
+{
+    margin: 0;
+    margin-top: 30px;
+    font-weight: bold;
+}
+.contenedorHistorial
+{
+    
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background-color: #F3F0D7;
+}
+
+.tablaHistorial
+{
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+.tablaHistorial, td
+{
+    border: 1px solid;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #faced7;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+  
+
+  .historialComprasOAFines {
+    width: 100%;
+    background-color: #FF7070;
+    padding: 8px;
+    border-radius: 23px;
+    font-size: 17px;
+}
+
+.fondoVista
+{
+    background-color: #F3F0D7;
+}
+
+.formularioVista {
+    width: 100%;
+    padding: 22px;
+    background-color: beige;
+    height: 9%;
+    border-radius: 23px;
+    margin-bottom: 18px;
+}
+
+
+
+
+  @media (min-width: 720px)
+  {
+
+    .contenedorFormularioPerfil
+    {
+        display: flex;
+        padding: 22px;
+        justify-content: space-between;
+    }
+
+    .formularioVista {
+        width: 50%;
+        padding: 22px;
+        margin-right: 11px;
+    }
+
+    .historiaIndividial {
+        height: 142px;
+    }
+
+    .textoHistorial
+    {
+        margin-top: 0;
+    }
+
+    .historialComprasOAFines {
+        width: 50%;
+        background-color: #FF7070;
+        padding: 30px;
+        border-radius: 23px;
+        height: 322px;
+        font-size: 15px;
+    }
+  }

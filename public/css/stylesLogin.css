@@ -1,0 +1,205 @@
+/*------login------*/
+
+.formLogin {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F3F0D7;
+    color: #000000;
+    margin: 3% auto;
+    padding: 3%;
+    border-radius: 20px;
+    width:90% ;
+}
+
+.formLogin div {
+    display: block;
+    padding: 2% 3%;
+    width: 100%;
+    margin: auto;
+
+}
+
+.saludo{
+    display: flex;
+    text-align: center;
+}
+.saludo i {
+    color: #FF7070;
+    font-size: 60px;;
+}
+
+#usuario, #contraseña {
+    margin: 3% 0px;
+    border: none;
+    border-radius: 30px;
+    width: 100%;
+    padding: 10px;
+    /*padding: 10px;*/
+    box-shadow: -4px 4px 2px #B0B8FF;
+    display: block;
+    text-align: left;
+    background-color: #ffffff;
+    font-size: 15px;
+}
+
+.ingresoA a, .ingresoB a{
+
+    margin: 3% 0px;
+    border: none;
+    border-radius: 30px;
+    width: 100%;
+    padding: 10px;
+    /*padding: 10px;*/
+    box-shadow: -4px 4px 2px #B0B8FF;
+    display: block;
+    
+    background-color: #ffffff;
+    font-size: 15px;
+}
+
+
+
+.ingresoB a{
+    background-color:#0044AA;
+    border-radius: 20px;
+    color: #F3F0D7;
+}
+
+.saludo h2, div h3{
+    color: #536FFF;
+}
+
+.buttonLogin{
+    width: 40% ;
+    text-align: center;
+    font-size: 15px;
+    color: #F3F0D7;
+    padding: 5px;
+    background-color:#FF7070;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: -4px 4px 2px #B0B8FF;
+}
+
+.send{
+    display: block;
+    text-align: center;
+}
+
+.ingresoA a, .ingresoB a{
+    text-decoration: none;
+    position: relative;
+}
+
+
+
+.ingresoA a i {
+    color: red;
+    
+}
+
+.ingresB {
+    color:white;
+    border: 0;
+    border-radius: 20px;
+    width: 100%;
+    font-size: 15px;
+    padding: 10px;
+    background-color: #0044AA;
+    text-decoration: none;
+}
+
+.ingresoA, .ingresoB
+{
+    position: static;
+}
+
+
+.googleLogo, .facebookLogo {
+    position: absolute;
+    width: 24px;
+    top: 19%;
+    right: 11%;
+}
+
+/*---------validaciones------------*/
+#usuarioIs-invalid, #contraseñaIs-invalid {
+    margin: 3% 0px;
+    border: none;
+    border-radius: 30px;
+    width: 100%;
+    padding: 10px;
+    /*padding: 10px;*/
+    box-shadow: -4px 4px 2px #dc3545;
+    display: block;
+    text-align: left;
+    background-color: #ffffff;
+    font-size: 15px;
+}
+.errorValidacion
+{
+    color: #dc3545;
+}
+/*-------tablet-----*/
+
+@media (min-width: 426px){
+
+    .form-busqueda button{
+        width: 8%;
+    }
+
+    .formLogin{
+        width: 65%;
+    }
+
+    .button{
+        font-size: 20px;
+    }
+
+    .ingresoB a::after, .ingresoA a::after {
+        content: "";
+        width: 0.3px;
+        height: 24px;
+        position: absolute;
+        top: 8px;
+        right: 27%;
+        background: #868986;
+    }
+
+}
+
+
+/*----desktop----*/
+@media (min-width: 769px){
+
+    .main-Login
+    {
+        background-image: url(/images/image-login.png);
+    }
+    .formLogin {
+
+        margin: 1% auto;
+        padding: 1%;
+        width:35% ;
+    }
+
+    .ingresoA a::after, .ingresoB a::after {
+        content: "";
+        width: 0.3px;
+        height: 24px;
+        position: absolute;
+        top: 7.5px;
+        right: 18%;
+        background: #868986;
+    }
+
+    .googleLogo, .facebookLogo {
+        position: absolute;
+        width: 17px;
+        top: 29%;
+        right: 5%;
+    }
+}

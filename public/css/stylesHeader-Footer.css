@@ -1,0 +1,424 @@
+* {
+    margin: 0px; /*centra todo*/
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    
+    background-color: #CEE5D0;
+    color: #536FFF;
+}
+
+/*----------------------HEADER----------------------*/
+
+div.top-header{
+    background-color: #FF7070;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.logo{
+    display: flex;
+    width: 15%;
+}
+.imagen-logo{
+    width: 45px;
+}
+.imagen-logo, .form-busqueda{
+    display: block;
+    align-self: center;   
+}
+.form-busqueda {
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+}
+.form-busqueda form{
+    width: 100%;
+    padding: 5px;
+}
+.form-busqueda input{
+    width: 80%;
+    border:0;
+    background-color: #F3F0D7;
+    border-radius: 10px;
+    padding: 5px 5px 5px 10px;
+}
+.form-busqueda button{
+    width: 10%;
+    border:0;
+    background-color: #F3F0D7;
+    border-radius: 20px;
+    padding: 5px;
+}
+.iconosHeader {
+    display: none;
+    align-items: center;
+    width: 22%;
+    justify-content: space-evenly;
+}
+.iconH i {
+    color: #FED2AA;
+    font-size: 20px;
+}
+div.burger-menu{
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    padding: 6px;
+    margin: 5px 2px;
+    color: #FF7070;
+    background-color: #FED2AA;
+    border-radius: 5px;
+}
+
+/*---------barra de navegacion--------*/
+
+div.button-header
+{
+    display: none;
+    background-color: #FED2AA;
+}
+div.button-header nav ul
+{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 5px;
+}
+.button-header ul li{
+    list-style-type: none;
+}
+.button-header ul li a{
+    text-decoration: none;
+    color: #FF7070;
+    transition: all 0.3s;
+}
+.button-header ul li a:hover{
+    color: #536FFF;
+}
+
+/* -------------- FOOTER -------------*/
+
+.footer-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between ; 
+    width: 100%;
+    padding: 0px; 
+    margin-top: 0px;
+    background-color: #FF7070;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*-------redes y medios de pago------*/
+
+.seguinos, .mediospago {
+    font-size: 22px;
+    width: 100%;
+    text-align: center;
+}
+.seguinos h4, .mediospago h4, .suscribe h4{
+    padding: 10px;
+}
+.seguinos i, .mediospago i{
+    padding-left: 10px;
+    padding-bottom: 10px;
+    font-size: 30px;
+    width: 20%;
+}
+
+#face, #twitter, #insta {
+color: #F3F0D7;
+}
+
+.imglogos {
+    width: 70%;
+    margin: auto;
+}
+.imagen-foot {
+    width: 22%;
+}
+
+/*--------suscribite -------*/
+
+.suscribe{
+    width: 70%; 
+    font-size: 22px;
+    padding: 10px;
+    background-color: #F3F0D7;
+    border-radius: 10px;
+    box-shadow: -4px 4px 2px #B0B8FF;
+    text-align: center;
+}
+.enemy{
+    padding: 6px;
+}
+input.enemy{
+    width: 90%;
+    padding: 6px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: -4px 4px 2px #B0B8FF;
+    font-size: 90%;
+    margin-bottom: 10px;
+}
+button.enemy{
+    font-size: 16px;
+    padding: 6px;
+    color: #F3F0D7;
+    background-color:#FF7070;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: -4px 4px 2px #B0B8FF;
+}
+.suscribe h4{
+    width: 33%;
+} 
+
+.seguinos a 
+{
+    text-decoration: none;
+}
+
+@media(min-width: 426px) {
+
+    .form-busqueda button{
+        width: 8%;
+    }
+    .iconosHeader {
+        display: flex;
+        position: relative;
+    }
+    div.button-header{
+        display: block;
+    }
+    div.burger-menu{
+        display: none;
+    }
+    #iconCuenta{
+        position: static;
+        cursor: pointer;
+    }
+    .login_desplegable_header{
+        display: block;
+        text-align: center;
+        margin-bottom: 14px;
+    }
+    .login_desplegable {
+        position: absolute;
+        right: 2px;
+        box-sizing: border-box;
+        opacity: 0;
+        width: 106px;
+        background-color: white;
+        padding: 5px;
+        z-index: -2;
+        box-shadow: 0 3px 6px #B0B8FF;
+        transition: all 1s;
+    }
+    .login_desplegable_login, .login_desplegable_signup, .login_desplegable_perfil, .login_desplegable_edit, .login_desplegable_close{
+        display:block;
+        text-align: center;
+        text-decoration: none;
+        color: #000;
+        
+    }
+    .login_desplegable_login:hover, .login_desplegable_signup:hover, .login_desplegable_perfil:hover, .login_desplegable_edit:hover, .login_desplegable_close:hover{
+        background-color: #e9e7e7;
+        
+    }
+    .inputCheck{
+        position: absolute;
+        display: none;
+    }
+    .inputCheck:checked + .login_desplegable{
+        opacity: 1;
+        z-index: 10;
+    }
+    #carritoS{
+        margin-right: 12px;
+    }
+
+/*------ FOOTER ------*/
+.footer-contenedor {
+    justify-content: space-around;
+    padding: 20px 0px; 
+    flex-direction: row;
+    
+}
+.seguinos , .mediospago , .suscribe{
+    
+    width: 33%;
+}
+input.enemy{
+    font-size: 16px;
+}
+}
+
+
+@media (min-width:769px){
+
+    .form-busqueda button{
+        width: 5%;
+    }
+    .login_desplegable {
+        right: -65px;
+    }
+    .login_desplegable {
+      
+        width: 159px;
+        
+    }
+    .iconosHeader{
+        position: static;
+    }
+    #iconCuenta{
+        position: relative;
+    } 
+
+    .switch {
+        background: #343D5B;
+        border-radius: 1000px;
+        border: none;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        
+        outline: none; /*Chrome lo agrega :V */
+      }
+
+      .switch span {
+        width: 30px;
+        height: 30px;
+        line-height: 36px;
+        display: block;
+        background: none;
+        
+        color: #fff;
+      }
+
+      .switch::after { /*Con after podemos agregar más cosas a un mismo elemento, en este caso sería la bolilla del toggle*/
+        content: "";
+        display: block;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        background: #F1F1F1;
+        top: 0;
+        left: 0;
+        right: unset; /*para que nunca se mueva por la derecha, solo al hacer click ahi si*/
+        border-radius: 100px;
+        transform: translateX(0px);
+        transition: .3s ease all;
+        box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      .switch.active { 
+        background: rgb(33, 209, 150);
+        color: #000;
+        
+      }
+
+      .switch.active::after { /*cuando hago click, se activa o se crea esta nueva configugracicon*/
+        /*right: 0;
+        left: unset;  ---> no utilizo esto porque no tendria la transición en el boton*/
+
+        transform: translateX(30px); /*forzamos para que se mueva el boton y tambien para obtener la transicion*/ 
+      }
+      
+      body{
+        transition: .3s ease all;
+      }
+
+      /*aca le damos el estilo en la versión noche ---------------- */
+
+      /*ESTILOS AL HOME*/
+      body.dark , body.dark div h3{
+        background-color: #2e2f2f;
+        color: #fdeae3;
+      }
+
+      body.dark div.top-header, body.dark .footer-contenedor{
+        background-color: #222222;
+        
+      }
+
+      body.dark div.top-header .form-busqueda input, body.dark input.enemy, body.dark .filtrado, body.dark article, body.dark div h3, body.dark .suscribe{
+        background-color: #2A3B47;
+      } 
+      body.dark div.top-header .form-busqueda input::placeholder, body.dark input.enemy::placeholder, .dark div.top-header .form-busqueda button i{
+        color: #fff;
+      } 
+      
+      body.dark div.top-header .form-busqueda button, body.dark button.enemy{
+          background-color: #525252;
+      }
+
+      body.dark .filtrado div select
+      {
+        background-color: #2a1e1e;
+        color: #f1f1f1;
+      }
+
+      body.dark .button-header
+      {
+        background-color: #424956;
+        
+      }
+
+      body.dark .button-header ul li a
+      {
+        color: #ffc9ce;
+      }
+
+      body.dark .login_desplegable
+      {
+          color: #000;
+      }
+      /*ESTILOS AL LOGIN----------------------*/
+      body.dark .formLogin
+      {
+        background-color: #2A3B47;
+      }
+
+      body.dark .texto label
+      {
+          color: #fff;
+      }
+
+      /*ESTILOS AL REGISTER*/
+      body.dark main.register div form{
+        background-color: #2A3B47;
+      }
+
+      body.dark .imagen-fondo-dark {
+        display: block;
+        width: 100%;
+        border-radius: 20px;
+        margin-top: 21px;
+    }
+    body.dark .imagen-fondo{
+        display: none;
+    }
+
+    /*Carrito*/
+    body.dark .contenedor-datosPago,body.dark .contenedor-resumen
+    {
+        background-color: #2A3B47;
+    }
+
+    .bodyCarrito.dark .mainCarrito
+    {
+        background-color: #2e2f2f;
+        color: #fdeae3;
+    }
+
+    /*detalle producto*/
+    body.dark main section.producto, body.dark main section.productos-relacionados, body.dark main section.productos-similares{
+        background-color: #2A3B47;
+        color: #fff;
+    }
+}

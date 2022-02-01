@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/stylesHeader-Footer.css">
+    <link rel="stylesheet" href="/css/stylesRegister.css">
+</head>
+<body>
+    <%- include('../partials/header') %> 
+    <main class="register">
+        <div>
+        <form action="/register" method="post" class="continuar" enctype="multipart/form-data">
+            <h3>Registrate</h3>
+            <h4> <i class="fas fa-user-circle"></i> Datos Personales<br></h4>
+            <div >
+                <input class="dato" type="file" name="avatar" id="avatar" value= "<%= locals.datosViejos? datosViejos.avatar:null %>" accept=".jpg,.png" > 
+            </div>
+            <% if (locals.errors && errors.avatar) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.avatar.msg %></p>
+                </div> 
+            <% } %>
+            <div >
+                <input class="dato" type="text" name="nombre" id="nombre" minlength="3" value= "<%= locals.datosViejos? datosViejos.nombre:null %>" placeholder="Nombre" > 
+            </div>
+            <% if (locals.errors && errors.nombre) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.nombre.msg %></p>
+                </div> 
+            <% } %>
+            <div >
+                <input class="dato"type="text" name="apellido" id="apeliido" minlength="3" value= "<%= locals.datosViejos? datosViejos.apellido:null %>" placeholder="Apellido" >  
+            </div>
+            <% if (locals.errors && errors.apellido) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.apellido.msg %></p>
+                </div> 
+            <% } %>
+            <div>
+                <input class="dato"type="text" name="telefono" id="telefono" minlength="10" value="<%= locals.datosViejos? datosViejos.telefono:null %>" placeholder="Telefono movil" > 
+            </div>
+            <% if (locals.errors && errors.telefono) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.telefono.msg %></p>
+                </div> 
+            <% } %>
+            <div >
+                <input class="dato" type="email" name="email" id="email" value= "<%= locals.datosViejos? datosViejos.email:null %>" placeholder="Correo Electronico" >
+            </div>
+            <% if (locals.errors && errors.email) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.email.msg %></p>
+                </div> 
+            <% } %>
+            <h4> <i class="fas fa-lock"></i> Contraseña<br></h4>
+            <div > 
+                <input class="dato" type="password" name="contrasenia" minlength="6" id="contrasenia" placeholder="Contraseña" >
+            </div>
+            <div >
+                <input class="dato" type="password" name="contrasenia2" minlength="6" id="contrasenia2" placeholder="Confirmar Contraseña" >
+            </div> 
+            <% if (locals.errors && errors.contrasenia) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.contrasenia.msg %></p>
+                </div> 
+            <% } %>
+            <div class = "botones">
+                <button class= "botonRegistro" type="submit"> enviar </button>
+                <button class= "botonRegistro" type="reset"> cancelar </button>
+            </div>
+        </form>
+        </div>
+        <div >
+            <form action="/" method="get" class="continuar">
+                <div class="ingresoA">
+                    <a href="/">Ingresá con Google
+                        <img src="/images/google.svg" alt="" class="googleLogo">
+                    </a>
+                   
+                    </div>
+                    <div class="ingresoB">
+                    <a  href="/">Ingresá con Facebook
+                        <img src="/images/facebook.svg" alt="" class="facebookLogo">
+                    </a>
+                    
+                    </div>
+            </form>
+            <img class= "imagen-fondo" src="/images/image-register.png" alt="">
+            <img class= "imagen-fondo-dark" src="/images/image-register-dark.png" alt="">
+        </div>
+       
+    </main>
+    <%- include('../partials/footer') %> 
+</body>
+</html>

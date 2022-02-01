@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../partials/head", {titulo: "Resultados de tu búsqueda"}) %> 
+<body>
+    <%- include("../partials/header") %> 
+    <main>
+        <div class="listadoProductos">
+           <% for(producto of productos){ %> 
+                <%- include("../products/article") %> 
+            <%}%> 
+        </div>
+    </main>
+    <%- include("../partials/footer") %> 
+</body>
+</html>
