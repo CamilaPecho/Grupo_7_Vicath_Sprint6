@@ -1,9 +1,11 @@
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
+const db = require("../database/models")
 const productController = {
 
     all:(req,res)=>{
-        
+        db.rol.findAll().then(roles => {
+            console.log(roles)
+        })
     },
 
     search:(req,res)=>{

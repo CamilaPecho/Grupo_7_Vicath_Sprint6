@@ -25,7 +25,7 @@ app.use(session({
 }))
 app.use(cookies())
 app.use(express.static('public'));
-app.use(usuarioLogeadoGlobal)
+//app.use(usuarioLogeadoGlobal)
 //😊 Con esto configuramos la aplicación para sobrescribir los métodos admitidos por el formulario 😎
 app.use(methodOverride('_method'));
 

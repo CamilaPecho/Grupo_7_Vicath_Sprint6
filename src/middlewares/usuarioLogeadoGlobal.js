@@ -1,10 +1,9 @@
 //traemos el modelo para extraer datos a partir de la cookie :p
-const usuarios = require('../model/jsonDatabase.js')
-const UserBD = usuarios('users')
+
 function usuarioLogeadoGlobal(req, res, next)
 {
     let usuarioCookie = req.cookies.mailCookie;
-    let usuarioEncontrado = UserBD.buscardorPorCategoriaIndividual('mail', usuarioCookie)
+    //let usuarioEncontrado = UserBD.buscardorPorCategoriaIndividual('mail', usuarioCookie)
     res.locals.usuarioHeader = false; //para eliminar el desplegable de registrarse y logearse si ya esta en sesión
 
     if(usuarioEncontrado)
