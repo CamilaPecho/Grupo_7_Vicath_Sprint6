@@ -1,3 +1,6 @@
+const db = require('../../src/database/models');
+const { Op } = require("sequelize");
+
 const {validationResult} = require('express-validator');
 const bcript = require('bcryptjs');
 
@@ -7,6 +10,7 @@ const userController = {
     },
 
     login: (req,res) =>{
+    
     const resultadosValidaciones = validationResult(req);
     
     if(!resultadosValidaciones.isEmpty())
@@ -15,17 +19,20 @@ const userController = {
     }
     
     //Ahora voy a validar si existe en la BD y tirar su respectivo error a la vista en caso de acierto
-    let usuarioEncontrado = users.buscardorPorCategoriaIndividual('mail', req.body.usuario)
-
-    if(usuarioEncontrado)
+    db.user.findOne({
+        where: {
+            email: {[Op.like]: req.body.usuario}
+        }
+    })
+    .then(function(usuarioEncontrado)
     {
-    //Ahora valido contraseñas, en caso de exito lo guardo en session
+//Ahora valido contraseñas, en caso de exito lo guardo en session
     
-    let contraseniaOk = bcript.compareSync(req.body.contrasenia, usuarioEncontrado.contraseña);
-        if(contraseniaOk)
+    //let contraseniaOk = bcript.compareSync(req.body.contrasenia, usuarioEncontrado.contraseña);
+        if(req.body.contrasenia == usuarioEncontrado.password)
         {
             console.log("entre pa");
-            delete usuarioEncontrado.contrasenia;
+            delete usuarioEncontrado.password;
             req.session.usuarioLogeado = usuarioEncontrado;
             
             //aca vemos si esta activo el checkbox de recordame, y si lo esta despierto mi cookie
@@ -47,13 +54,17 @@ const userController = {
                 }
             }, oldData: req.body})
         }
-    }
+    })
+    .catch(function(error)
+    {
+        return res.render('./users/login', {errors: {
+            usuario: {
+                msg: "No se encontró este usuario en nuestro sistema!"
+            }
+        }})
+    })
 
-    return res.render('./users/login', {errors: {
-        usuario: {
-            msg: "No se encontró este usuario en nuestro sistema!"
-        }
-    }})
+    
     },
     
     logout: (req, res) =>{
@@ -103,9 +114,10 @@ const userController = {
     },
 
     verPerfil:(req,res)=>{
-        if(req.session.usuarioLogeado.rol == "admin")
+    
+        if(req.session.usuarioLogeado.rol_id == 2)
         {
-            return res.redirect('profileAdmin');
+            return res.redirect('homeAdmin');
         }
         else{res.render('./users/perfil', {usuarioDatos: req.session.usuarioLogeado});}
         

@@ -12,6 +12,8 @@ router.get('/productDetail/:id', productController.productDetail)
 
 router.get('/categorias/:categoria',productController.category)
 
+router.get('/novedades',productController.novedades)
+
 router.get('/busqueda',productController.search)
 //Para agregar un producto
 router.get('/create', productController.viewProductAdd); //para devolver la vista formulario

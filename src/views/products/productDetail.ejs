@@ -17,18 +17,18 @@
         <main>
             <section class="producto">
                 <div class="tituloYPrecio">
-                    <p class="tituloP"><%= detailProd.title %></p>
+                    <p class="tituloP"><%= detailProd.name %></p>
                     <p class="precioP"><%= detailProd.price %></p>
                 </div>
                 <div class="imagenesProdContenedor">
                 
                 <div class="imagen-producto">
-                    <img src="/images/<%= detailProd.image[0] %>" class="cartuchera">
+                    <img src="/images/<%= detailProd.images[0].name %>" class="cartuchera">
                 </div>
                 
                 <div class="imagen-producto-hijas">
-                    <% for( let i = 1; i < (detailProd.image).length; i++ ) { %>
-                        <div class="prodHija"><img src="/images/<%= detailProd.image[i] %>"  alt=""></div>
+                    <% for( let i = 1; i < (detailProd.images).length; i++ ) { %>
+                        <div class="prodHija"><img src="/images/<%= detailProd.images[i].name %>"  alt=""></div>
                     <% } %>
                 </div>
                 
@@ -69,7 +69,7 @@
                 </div>
             </div>
                 <div class="descripcionTotalProducto">
-                    <h4 class="titulo"><%= detailProd.title %></h4> 
+                    <h4 class="titulo"><%= detailProd.name %></h4> 
                     <p class="precio"><%= detailProd.price %></p>
                     <p class="descripcion">
                     Descripcion: <%= detailProd.description %> 

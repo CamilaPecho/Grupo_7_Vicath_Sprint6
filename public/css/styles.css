@@ -66,7 +66,8 @@ main section article img{
 article.articuloClass{
     width: 90%;
     margin: 5px auto;
-    
+    position: relative;
+    padding-bottom: 45px;
     background-color: #F3F0D7;
     border-radius: 10px;
     transition: all 0.3s;
@@ -149,6 +150,36 @@ article.articuloClass{
     left: 0px;
     bottom: 0px;
 }
+
+/* Páginado */
+.contenedorPaginado {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+.contenedorEnlaces {
+    padding: 10px 50px;
+    background-color: #fed2aa;
+    border-radius: 20px;
+    display: flex;
+}
+
+.contenedorEnlaces a {
+    text-decoration: none;
+    color: #000;
+    width: 29px;
+    display: block;
+    text-align: center;
+    transition: all 0.3s
+}
+.contenedorEnlaces a:hover {
+    background-color: rgb(215, 237, 255);
+    border-radius: 50px;
+    border: 1px solid #000;
+}
+
 @media(min-width: 361px) {
 
     .productos{

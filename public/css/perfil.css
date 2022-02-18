@@ -23,6 +23,7 @@ body
 {
     display: flex;
     margin-bottom: 12px;
+    justify-content: center;
 }
 
 .contenedorCampo label
@@ -36,7 +37,7 @@ body
 {
     border: 0;
     padding: 10px;
-    width: 51%;
+    width: 65%;
     border-radius: 15px;
     box-shadow: -4px 4px 2px #b0b8ff;
 
@@ -117,9 +118,27 @@ tbody tr:nth-child(odd) {
     margin-bottom: 18px;
 }
 
+.imagenAvatar
+{
+    width: 39%;
+    order: -1;
+    margin: auto;
+    margin-bottom: 12px;
+}
+.imagenAvatar img
+{
+    width: 100%;
+    border-radius: 76px;
+}
 
-
-
+.formularioPerfil{
+    display: flex;
+    flex-wrap: wrap;
+}
+.datosPersonales
+{
+    width: 100%;
+}
   @media (min-width: 720px)
   {
 
@@ -134,6 +153,7 @@ tbody tr:nth-child(odd) {
         width: 50%;
         padding: 22px;
         margin-right: 11px;
+        margin: auto;
     }
 
     .historiaIndividial {
@@ -152,5 +172,25 @@ tbody tr:nth-child(odd) {
         border-radius: 23px;
         height: 322px;
         font-size: 15px;
+    }
+
+    .formularioPerfil{
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .datosPersonales{
+        width: 70%;
+    }
+    .imagenAvatar
+    {
+        width: 30%;
+        order: 0;
+        margin: unset;
+        margin-bottom: unset;
+    }
+    .contenedorCampo input
+    {
+       width: 65%;
     }
   }

@@ -18,12 +18,17 @@
               <div class="fondoVista">
             <p class="parrafoPerfilInicio"><i class="fas fa-user-circle"></i> Perfil de usuario</p>
             <form action="" class="formularioPerfil">
-                <div class="contenedorCampo"><label for="">Nombre: </label><input type="text" name="" id="" value="<%= usuarioDatos.nombre%>"></div>
+                <div class="datosPersonales">
+                  <div class="contenedorCampo"><label for="">Nombre: </label><input type="text" name="" id="" value="<%= usuarioDatos.nombre%>"></div>
                 <div class="contenedorCampo"><label for="">Apellido: </label><input type="text" name="" id="" value="<%= usuarioDatos.apellido%>"></div>
                 <div class="contenedorCampo"><label for="">Telefono: </label><input type="text" name="" id="" value="<%= usuarioDatos.telefono%>"></div>
                 <div class="contenedorCampo"><label for="">E-mail: </label><input type="text" name="" id="" value="<%= usuarioDatos.mail%>"></div>
                 <div class="contenedorBoton">
                     <button type="button">Editar <i class="fas fa-edit"></i></button>
+                </div>
+                </div>
+                <div class="imagenAvatar">
+                  <img src="/images/users/<%= usuarioDatos.imagen %>" alt="">
                 </div>
             </form>
             </div>

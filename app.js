@@ -12,6 +12,7 @@ const adminMiddleware = require('./src/middlewares/adminMiddleware')
 const main = require("./src/routers/main");
 const users = require("./src/routers/users");
 const products = require("./src/routers/products");
+const admin = require("./src/routers/admin")
 //
 
 //Tenemos a mano la ejecución de express 🎁
@@ -25,7 +26,7 @@ app.use(session({
 }))
 app.use(cookies())
 app.use(express.static('public'));
-//app.use(usuarioLogeadoGlobal)
+app.use(usuarioLogeadoGlobal)
 //😊 Con esto configuramos la aplicación para sobrescribir los métodos admitidos por el formulario 😎
 app.use(methodOverride('_method'));
 
@@ -41,6 +42,7 @@ app.use(express.json());
 app.use("/",main);
 app.use('/', users);
 app.use('/products', products);
+app.use('/admin', admin);
 //=======================================================================================
 
 //Va al final de todo para que no capture peticiónes que de verdad no existen 😐
@@ -53,4 +55,3 @@ app.use((req, res, next) =>
 app.listen (process.env.PORT || 3001, ()=>{
     console.log('⭐ Servidor funcionando en el puerto 3001 ⭐');
 });
-

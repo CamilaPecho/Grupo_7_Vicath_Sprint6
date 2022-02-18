@@ -1,19 +1,32 @@
 //traemos el modelo para extraer datos a partir de la cookie :p
+const db = require('../database/models')
+const { Op } = require("sequelize");
 
 function usuarioLogeadoGlobal(req, res, next)
 {
+    
     let usuarioCookie = req.cookies.mailCookie;
-    //let usuarioEncontrado = UserBD.buscardorPorCategoriaIndividual('mail', usuarioCookie)
-    res.locals.usuarioHeader = false; //para eliminar el desplegable de registrarse y logearse si ya esta en sesión
+    res.locals.usuarioHeader = false; 
 
-    if(usuarioEncontrado)
+    console.log("esto si?")
+    db.user.findOne({
+        where: {
+            email: {[Op.like]: usuarioCookie}
+        }
+    })
+    .then(function(usuarioEncontrado)
     {
         delete usuarioEncontrado.contrasenia;
         req.session.usuarioLogeado = usuarioEncontrado;
-    }
+    })
+    .catch(err =>{
+        console.log("se rompio pa")
+    })
 
+    console.log("codigo procedural")
     if(req.session && req.session.usuarioLogeado)
     {
+        
         res.locals.usuarioHeader = true;
         res.locals.datosUsuarioGlobal = req.session.usuarioLogeado;
     }

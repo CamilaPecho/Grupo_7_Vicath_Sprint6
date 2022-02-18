@@ -44,19 +44,37 @@
     border-radius: 10px;
 }
 
+
+.tablaUsers{
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #F3F0D7;
+    border-radius: 10px;
+}
+
 .tabla table{
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
+    
+}
+
+.tablaUsers table{
+    width: 100%;
+    border-collapse: collapse;
+    
 }
 
 .tabla table th {
     text-align: left;
 }
-
-#descripcion, #categoria{
-    display: none;
+.tablaUsers table th {
+    text-align: left;
 }
+
+
+ 
 
 button.crearProducto, .botonEditar{
     margin: 10px 5px;
@@ -136,9 +154,7 @@ button.botonCrear, .botonCancelar{
 @media(min-width: 361px) {
     
     /*--------parte del listaproduct-----*/
-    #categoria{
-        display: block;
-    }
+    
 }
 
 

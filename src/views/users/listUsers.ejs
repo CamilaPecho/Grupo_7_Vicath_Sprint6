@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../partials/head", {titulo: "Todos los usuarios"}) %> 
+<body>
+    <%- include('../partials/header') %> 
+    <main class="listProducts">
+        <div class="contenedorCrearPorducto">
+            <a href="/products/create"><button class="crearProducto">Agregar un usuario</button></a>
+        </div>
+        <div class="filtradoLista">
+            <form action="/" method="get" class="elegirfiltrado">
+                <h4>Filtrar:</h4>
+                <div>
+                    <select name="categorias">
+                        <option value="categoria-1">Cliente</option> 
+                        <option value="categoria-2">Administrador</option>
+                    </select> 
+                </div>
+            </form>
+        </div>
+        <div class="tablaUsers">
+            <table>
+                <tr>
+                    <th id="nombre">Nombre</th>
+                    <th id="descripcion">E-mail</th>
+                    <th id="precio">Teléfono</th>
+                    <th id="categoria">Rol</th>
+                </tr>
+                
+                <% for(let usuario of usuarios){%>
+                <tr>
+                    <td id="nombre"> <%= usuario.first_name %> </td>
+                    <td id="email"> <%= usuario.email %> </td>
+                    <td id="telefono"> <%= usuario.phone_number %> </td>
+                    <td id="categoria"> <%= usuario.rol.name %> </td>
+                    <td>
+                        <a href="/products/edit/<%= usuario.id %>"> <button class="botonEditar" type="submit"> Editar </button></a>
+                    </td>
+                    <td>
+                        <form action="/admin/users/delete/<%= usuario.id %>?_method=DELETE" method="POST">
+                            <button class="botonEliminar" type="submit"> Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+            </table>
+        </div>
+    </main>
+    <%- include('../partials/footer') %> 
+</body>
+</html>

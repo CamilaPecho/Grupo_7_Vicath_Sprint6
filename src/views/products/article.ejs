@@ -1,9 +1,9 @@
 <article class="articuloClass">
     <a href="/products/productDetail/<%= producto.id %>">
-        <img src= "/images/<%= producto.image[0] %>"  class="imagenProducto" >
+        <img src= "/images/<%= producto.images[0].name %>"  class="imagenProducto" >
     </a>
     <div class="main-article-principal">
-        <h4><%= producto.title %> </h4>
+        <h4><%= producto.name %> </h4>
         <p><%= producto.description %></p>
         <div class="contenedor-precio">
             <p class="precio">$<%= producto.price %> </p>
