@@ -167,6 +167,7 @@ input.enemy{
 }
 button.enemy{
     font-size: 16px;
+    cursor: pointer;
     padding: 6px;
     color: #F3F0D7;
     background-color:#FF7070;

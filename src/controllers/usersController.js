@@ -114,7 +114,7 @@ const userController = {
     },
 
     verPerfil:(req,res)=>{
-    
+        //para cande
        
     },
 

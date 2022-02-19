@@ -15,56 +15,37 @@
         <section class="filtrado-contenedor">
             <div class="filtrado">
             <h3>Filtrar por:</h3>
-            <form action="/" method="get" class="filtrar-marca">
+            <form action="/products/filtrado" method="get" class="filtrar-marca">
                 <div>
                     <h4><label for="marcas"> Marcas <br></label></h4>
                     <select name="marcas">
-                        <option value="marca">---marca---</option> 
-                        <option value="marca-1">marca 1</option> 
-                        <option value="marca-2">marca 2</option>
-                        <option value="marca-3">marca 3</option> 
-                        <option value="marca-4">marca 4</option> 
+                        <option value="">Selecciona una marca flaco</option>
+                        <% for(marca of marcas){ %>
+                            <option value="<%= marca.name %>"><%= marca.name %></option> 
+                        <% } %>  
                     </select> 
-                </div>
-                <div>
-                    <h4><label for="tipo-producto"> Tipo de producto <br></label></h4>
-                    <select name="tipo-producto">
-                        <option value="tipo">---tipo---</option> 
-                        <option value="tipo-1">tipo 1</option> 
-                        <option value="tipo-2">tipo 2</option>
-                        <option value="tipo-3">tipo 3</option> 
-                        <option value="tipo-4">tipo 3</option> 
-                    </select>
                 </div>
                 <div>
                     <h4><label for="colores"> Color <br></label></h4>
                     <select name="colores">
-                        <option value="color">---color---</option> 
-                        <option value="color-1">color 1</option> 
-                        <option value="color-2">color 2</option>
-                        <option value="color-3">color 3</option> 
-                        <option value="color-4">color 3</option> 
+                        <option value="">Selecciona un color</option> 
+                        <% for(color of colores){ %>
+                            <option value="<%= color.name %>"><%= color.name %></option> 
+                        <% } %>   
                     </select>
                 </div>
                 <div>
-                    <h4><label for="modelo"> Modelo <br></label></h4>
-                    <select name="modelo">
-                        <option value="modelo">---modelo---</option> 
-                        <option value="modelo-1">modelo 1</option> 
-                        <option value="modelo-2">modelo 2</option>
-                        <option value="modelo-3">modelo 3</option> 
-                        <option value="modelo-4">modelo 3</option> 
+                    <h4><label for="precio"> Precio <br></label></h4>
+                    <select name="precio">
+                        <option value="">Selecciona un precio</option> 
+                        <option value="1000">Mayor a $1000</option> 
+                        <option value="2500">Mayor a $2500</option>
+                        <option value="3400">Mayor a $3400</option> 
+                        <option value="5000">Mayor a $5000</option> 
                     </select>
                 </div>
                 <div>
-                    <h4><label for="material"> Material <br></label></h4>
-                    <select name="material">
-                        <option value="material">---material---</option> 
-                        <option value="material-1">material 1</option> 
-                        <option value="material-2">material 2</option>
-                        <option value="material-3">material 3</option> 
-                        <option value="material-4">material 3</option> 
-                    </select>
+                    <button class="enemy" type="submit" >Realizar filtrado</button>
                 </div>
             </form>
             </div>

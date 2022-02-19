@@ -57,12 +57,16 @@ const mainController = {
             ]
         })
 
+        let marcas = db.brand.findAll()
+
+        let colores = db.color.findAll()
         //////
 
-        Promise.all([destacados,ofertas,novedades])
-        .then(function([destacados,ofertas,novedades])
+        Promise.all([destacados,ofertas,novedades,marcas,colores])
+        .then(function([destacados,ofertas,novedades,marcas,colores])
         {
-            return res.render("home", {destacados, ofertas, novedades})
+           
+            return res.render("home", {destacados, ofertas, novedades, marcas, colores})
         })
         .catch(err => {
             console.log(err)

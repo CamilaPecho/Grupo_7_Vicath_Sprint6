@@ -9,18 +9,20 @@
                 <%- include("../products/article") %> 
             <%}%> 
         </div>
-        <div class="contenedorPaginado">
-            <div class="contenedorEnlaces">
-                <a href="">1</a>
-                <a href="">2</a>
-                <a href="">3</a>
-                <a href="">4</a>
-                <a href="">5</a>
-                <a href="">6</a>
-                <a href="">7</a>
+        <% if (locals.cantidadTotal) { %>
+            <div class="contenedorPaginado">
+                <div class="contenedorEnlaces">
+                    <% for( let i = 1; i <= (cantidadTotal.length/6); i++ ) { %>
+                        <a><%= i %> </a>
+                    <% } %>
+                    
+                    
+                </div>
             </div>
-        </div>
+        <% } %>
+        
     </main>
-    <%- include("../partials/footer") %> 
+    <%- include("../partials/footer") %>
+    <script src="/js/paginado.js"></script> 
 </body>
 </html>

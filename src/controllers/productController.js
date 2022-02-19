@@ -1,5 +1,6 @@
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 const db = require("../database/models");
+const { Op } = require("sequelize");
 const brand = require("../database/models/brand");
 const productController = {
 
@@ -18,15 +19,59 @@ const productController = {
     },
 
     search:(req,res)=>{
-        db.product.findAll({
+        let productos = db.product.findAll({
             where: {
                 name: {[Op.like]: req.query.busqueda + "%"}
             },
-            include: [{association: "images"}]
+            include: [{association: "images"}],
+            limit: 6,
+            offset: (req.query.pagina ? (req.query.pagina-1)*6 : 0)
+        })
+        let cantidadTotal = db.product.findAll({
+            where: {
+                name: {[Op.like]: req.query.busqueda + "%"}
+            },
+            include: [{association: "images"}],
+        })
+
+        Promise.all([productos, cantidadTotal])
+        .then(function([productos, cantidadTotal])
+        {
+          
+            return res.render("./products/results", {productos, cantidadTotal})
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    },
+
+    filter:(req,res)=>{
+        console.log("-----------------------------------------------")
+        db.product.findAll({
+            include: [{association: "images"},
+            {
+                association: "brand", 
+                where: {
+                    name: {[Op.like]: req.query.marcas}
+                    },
+                required: false
+            }, 
+            {
+                association: "color",
+                where: {
+                    name: {[Op.like]: req.query.colores}
+                },
+                required: false
+            }
+                    ],
+            where: {
+                price: {[Op.gte]: req.query.precio}
+            }
         })
         .then(function(productos)
         {
-          
+            //Creo que no se puede redireccionar al home. Si queremos hacer ese efecto
+            //dinamica hace falta ver React, no se :V
             return res.render("./products/results", {productos})
         })
         .catch(error => {
