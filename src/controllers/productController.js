@@ -103,7 +103,9 @@ const productController = {
          
      },
 
-    viewProducts:(req,res) =>{
+     viewProducts:(req,res) =>{
+       
+        res.render("./products/listProducts",{products})
     },
 
     viewProductAdd: (req,res) =>{
