@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-const db = require('../../src/database/models');
-const { Op } = require("sequelize");
-const moment = require("moment")
+const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+const db = require("../database/models");
+const brand = require("../database/models/brand");
 const productController = {
 
     all:(req,res)=>{
@@ -16,19 +15,6 @@ const productController = {
         {
             console.log(error)
         })
-=======
-const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-const db = require("../database/models");
-const brand = require("../database/models/brand");
-const productController = {
-
-    all:(req,res)=>{
-        db.Product.findAll()
-            .then(productos => {
-                res.render('./products/results' ,{products})
-            })
-            .catch(error => res.send(error))
->>>>>>> 117656dbd65ea11b117a294877e0227375f064e3
     },
 
     search:(req,res)=>{
@@ -102,20 +88,20 @@ const productController = {
     },
 
     productDetail:(req, res)=>{
-       db.product.findByPk(req.params.id,
+        db.product.findByPk(req.params.id,
+         {
+             include: [{association: "images"}]
+         })
+        .then(function(detailProd)
         {
-            include: [{association: "images"}]
+         return res.render("./products/productDetail", {detailProd})
         })
-       .then(function(detailProd)
-       {
-        return res.render("./products/productDetail", {detailProd})
-       })
-       .catch(function(error)
-       {
-           console.log(error)
-       })
-        
-    },
+        .catch(function(error)
+        {
+            console.log(error)
+        })
+         
+     },
 
     viewProducts:(req,res) =>{
     },
