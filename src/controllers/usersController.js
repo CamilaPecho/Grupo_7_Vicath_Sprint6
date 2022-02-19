@@ -115,12 +115,7 @@ const userController = {
 
     verPerfil:(req,res)=>{
     
-        if(req.session.usuarioLogeado.rol_id == 2)
-        {
-            return res.redirect('homeAdmin');
-        }
-        else{res.render('./users/perfil', {usuarioDatos: req.session.usuarioLogeado});}
-        
+       
     },
 
     verPerfilAdmin:(req,res)=>{
