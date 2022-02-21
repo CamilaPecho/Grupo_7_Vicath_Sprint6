@@ -9,32 +9,73 @@
             <h3>Crear Producto</h3>
             <div>
                 <h4>Nombre Producto</h4>
-                <input class="dato" type="text" name="title" id="title" placeholder="Titulo" required> 
+                <input class="dato" type="text" name="name" id="name" placeholder="Titulo" required> 
             </div>
             <div >
-                <h4>Imagen</h4>
+                <h4>Imagenes</h4>
                 <input class="imagen" type="file" name="image" id="image"  placeholder="imagen" multiple required>  
             </div>
             <div>
                 <h4>Descripcion</h4>
-                <textarea class="dato" name="description" cols="20" rows="5" id="description" placeholder="descripcion" required  ></textarea>
+                <input class="dato" type="text" name="description" id="price" placeholder="Descripcion corta" required> 
+            </div>
+            <div>
+                <h4>Descripcion Completa</h4>
+                <textarea class="dato" name="extended_description" cols="20" rows="5" id="extended_description" placeholder="Descripcion" required  ></textarea>
             </div>
             <div>
                 <h4>Precio</h4>
-                <input class="dato" type="number" name="price" id="price" placeholder="precio" required> 
+                <input class="dato" type="number" name="price" id="price" placeholder="Precio" required> 
             </div>
-            <div >
-                <h4>Elegir Categoria</h4>
-                <select name="category">
-                    <option value="destacados">destacados</option> 
-                    <option value="novedades">novedades</option> 
-                    <option value="ofertas">ofertas</option>
-                </select>
+            <div>
+                <h4>Descuento</h4>
+                <input class="dato" type="number" min="0" max="100" name="discount" id="discount" placeholder="Descuento(%)" required> 
             </div>
-
+            <div class="inputs">
+                <div class="inputsData">
+                    <h4>Stock</h4>
+                    <input class="dato" type="number" min="0" name="stock" id="stock" placeholder="stock" required> 
+                </div>
+                <div class="inputsData">
+                    <h4>Stock Minimo</h4>
+                    <input class="dato" type="number" min="0" name="stock_min" id="stock_min" required> 
+                </div>
+                <div class="inputsData">
+                    <h4>Stock Maximo</h4>
+                    <input class="dato" type="number" min="0" name="stock_max" id="stock_max" required> 
+                </div>
+            </div>
+            <div class="inputs">
+                <div class="inputsData">
+                    <h4>Elegir Categoria</h4>
+                    <select name="category">
+                        <% for( let category of categories ) { %>
+                            <option value='<%=category.id %>'><%=category.name%></option> 
+                        <% } %>
+                    </select>
+                </div>
+                <div class="inputsData">
+                    <h4>Elegir Color</h4>
+                    <select name="color">
+                        <% for( let color of colors ) { %>
+                            
+                            <option value="<%=color.id %>"><%=color.name%></option> 
+                            
+                        <% } %>
+                    </select>
+                </div>
+                <div class="inputsData">
+                    <h4>Elegir Marca</h4>
+                    <select name="brand">
+                        <% for( let brand of brands ) { %>
+                            <option value="<%=brand.id %>"><%=brand.name%></option> 
+                        <% } %>
+                    </select>
+                </div>
+            </div>
             <div class = "botones">
                 <button class= "botonCrear" type="submit"> crear </button>
-                <button class= "botonCancelar" type="reset"> cancelar </button>
+                <a href="/products/viewProducts"><button class= "botonCancelar" type="button"> cancelar </button></a>
             </div>
         </form>
         </div>

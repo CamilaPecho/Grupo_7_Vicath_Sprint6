@@ -14,7 +14,7 @@ router.get('/register', guestMiddleware, userController.viewRegister);
 router.post('/register',avatarProfile.single('avatar'),validacionesRegister, userController.register);
 
 router.get('/profile', authMiddleware, userController.verPerfil)
-
+router.get('/modocliente', userController.modoCliente)
 router.get('/homeAdmin', userController.homeAdmin)
 
 router.get('/logout', userController.logout)

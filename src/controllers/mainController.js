@@ -22,6 +22,9 @@ const mainController = {
                         discount: {
                             [Op.gte]: 40
                         }
+                    },
+                    {
+                        deleted:0
                     }
                 ]
             },
@@ -32,7 +35,14 @@ const mainController = {
         
         let ofertas = db.product.findAll({
             where: {
-                discount: {[Op.gte] : 30}
+                [Op.and]: [
+                {
+                    discount: {[Op.gte] : 30}
+                },
+                {
+                    deleted: 0
+                }
+                ]
             },
             include: [
                 {association: "images"}
@@ -50,7 +60,8 @@ const mainController = {
 
                 //Obviamente si creas productos en el mismo instante o dia, todas te van
                 //a aparecer como novedades
-                createdAt: {[Op.gte]: moment().subtract(15, 'days').toDate()} 
+                createdAt: {[Op.gte]: moment().subtract(15, 'days').toDate()},
+                deleted: 0
             },
             include: [
                 {association: "images"}
