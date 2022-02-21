@@ -7,12 +7,11 @@ router.get('/all', productController.all);
 
 router.get('/cart', productController.cart);
 
-//Para mostrar un producto 👀
 router.get('/productDetail/:id', productController.productDetail)
 
 router.get('/categorias/:categoria',productController.category)
 
-router.get('/novedades',productController.novedades)
+router.get('/novedades',productController.news)
 
 router.get('/busqueda',productController.search)
 
@@ -26,6 +25,8 @@ router.get("/edit/:id",productController.viewProductEdit);
 router.put("/edit/:id",imagesProduct.array('image'), productController.productEdit);
 //Para listar productos tabla admin 📖
 router.get('/viewProducts', productController.viewProducts);
+
+router.get("/viewproductDetail/:id",productController.productDetailAdmin);
 
 router.delete('/delete/:id', productController.productDelete)
 

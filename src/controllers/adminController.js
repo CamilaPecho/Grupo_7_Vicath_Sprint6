@@ -3,24 +3,23 @@ const { Op } = require("sequelize");
 
 const adminController = {
     eliminarUsuario: (req,res) =>{
-    db.user.destroy({
-        where: {
-            id: req.params.id
-        },
-        force: true
-    })
-    .then(function(usuario)
-    {
-        return res.redirect("/admin/users")
-    })
-    .catch(function(error)
-    {
-        console.log(error)
-    })
+        db.user.destroy({
+            where: {
+                id: req.params.id
+            },
+            force: true
+        })
+        .then(function(usuario)
+        {
+            return res.redirect("/admin/users")
+        })
+        .catch(function(error)
+        {
+            console.log(error)
+        })
     },
 
-    listarUsuarios: (req,res) =>
-    {
+    listarUsuarios: (req,res) =>{
         db.user.findAll(
             {
                 include: [{association: "rol"}]

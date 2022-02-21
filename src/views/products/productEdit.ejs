@@ -8,36 +8,87 @@
             <form action="/products/edit/<%= producto.id %>?_method=PUT" method="POST" class="crear" enctype="multipart/form-data">
                 <h3>Editar Producto</h3>
                 <div>
-                    <h4>Nombre Producto</h4>
-                    <input class="dato" type="text" name="title" id="title" value="<%= producto.title  %>" required>
-                </div>
-                <div >
-                    <h4>Imagen</h4>
-                    <input class="imagen" type="file" name="image" id="image" value="<%= producto.image[0]%>" multiple >
+                    <h4>Nombre Producto</h4>
+                    <input class="dato" type="text" name="name" id="name" value="<%= producto.description %>" required> 
                 </div>
                 <div>
-                    <h4>Descripcion</h4>
-                    <textarea class="dato" name="description" cols="20" rows="5" id="description"  required ><%= producto.description  %></textarea>
+                    <h4>Imagenes</h4>
+                    <input class="imagen" type="file" name="image" id="image" multiple>  
                 </div>
                 <div>
-                    <h4>Precio</h4>
-                    <input class="dato" type="number" name="price" id="price" value="<%= producto.price  %>" required>
+                    <h4>Descripcion</h4>
+                    <input class="dato" type="text" name="description" id="price" value="<%= producto.description %>" required> 
                 </div>
-                <div >
-                    <h4>Elegir Categoria</h4>
-                    <select name="category">
-                        <option value="destacados">destacados</option>
-                        <option value="novedades">novedades</option>
-                        <option value="ofertas">ofertas</option>
-                    </select>
+                <div>
+                    <h4>Descripcion Completa</h4>
+                    <textarea class="dato" name="extended_description" cols="20" rows="5" id="extended_description"  required ><%= producto.extended_description %></textarea>
                 </div>
-                <div class = "botones">
+                <div>
+                    <h4>Precio</h4>
+                    <input class="dato" type="number" name="price" id="price" value="<%= producto.price  %>" required> 
+                </div>
+                <div>
+                    <h4>Descuento</h4>
+                    <input class="dato" type="number" min="0" max="100" name="discount" id="discount" value="<%= producto.discount  %>" required> 
+                </div>
+                <div class="inputs">
+                    <div class="inputsData">
+                        <h4>Stock</h4>
+                        <input class="dato" type="number" min="0" name="stock" id="stock" placeholder="stock" value="<%= producto.stock  %>" required> 
+                    </div>
+                    <div class="inputsData">
+                        <h4>Stock Minimo</h4>
+                        <input class="dato" type="number" min="0" name="stock_min" id="stock_min" value="<%= producto.stock_min  %>" required> 
+                    </div>
+                    <div class="inputsData">
+                        <h4>Stock Maximo</h4>
+                        <input class="dato" type="number" min="0" name="stock_max" id="stock_max" value="<%= producto.stock_max  %>" required> 
+                    </div>
+                </div>
+                <div class="inputs">
+                    <div class="inputsData">
+                        <h4>Elegir Categoria</h4>
+                        <select name="category">
+                            <% for( let category of categories ) { %>
+                                <% if (category.id == producto.category_id) { %>
+                                    <option value='<%=category.id %>' selected><%=category.name%></option> 
+                                <% } else{ %>
+                                    <option value='<%=category.id %>'><%=category.name%></option> 
+                                <%}%>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="inputsData">
+                        <h4>Elegir Color</h4>
+                        <select name="color">
+                            <% for( let color of colors ) { %>
+                                <% if (color.id == producto.color_id) { %>
+                                    <option value="<%=color.id %>" selected><%=color.name%></option> 
+                                <% } else{ %>
+                                    <option value="<%=color.id %>"><%=color.name%></option> 
+                                <%}%>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="inputsData">
+                        <h4>Elegir Marca</h4>
+                        <select name="brand">
+                            <% for( let brand of brands ) { %>
+                                <% if (brand.id == producto.brand_id) { %>
+                                    <option value="<%=brand.id %>" selected><%=brand.name%></option> 
+                                <% } else{ %>
+                                    <option value="<%=brand.id %>"><%=brand.name%></option> 
+                                <%}%>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+                <div class="botones" >
                     <button class= "botonCrear" type="submit"> editar </button>
-                    <a href="/products/verProducts"><button class= "botonCancelar" type="button"> cancelar </button></a>
+                    <a href="/products/viewProducts"><button class= "botonCancelar" type="button"> cancelar </button></a>
                 </div>
             </form>
         </div>
-
     </main>
     <%- include('../partials/footer') %> 
 </body>

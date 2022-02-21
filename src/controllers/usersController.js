@@ -1,6 +1,6 @@
 const db = require('../../src/database/models');
 const { Op } = require("sequelize");
-
+const moment = require("moment")
 const {validationResult} = require('express-validator');
 const bcript = require('bcryptjs');
 
@@ -128,9 +128,10 @@ const userController = {
     verPerfil:(req,res)=>{
         if(req.session.usuarioLogeado.rol_id == 2)
         {
-            return res.redirect('profileAdmin');
+            return res.redirect('/homeAdmin');
         }
         else{res.render('./users/perfil', {usuarioDatos: req.session.usuarioLogeado});}
+<<<<<<< HEAD
         
     },
 
@@ -310,6 +311,9 @@ const userController = {
         
     
 
+=======
+       
+>>>>>>> ad62f37102552a5b0270c870592bdd0a9e634cd0
     },
 
     verPerfilAdmin: (req,res)=>{
@@ -322,13 +326,68 @@ const userController = {
     },
 
     modoCliente: (req, res) => {
-        const destacados = productModel.buscardorPorCategoria("category", "destacados");
-        const ofertas = productModel.buscardorPorCategoria("category", "ofertas");
-        const novedades = productModel.buscardorPorCategoria("category", "novedades");
+        let destacados = db.product.findAll({
+            where: {
+                [Op.and]: [
+                    {
+                        stock: {
+                            [Op.gte]: 30
+                        }
+                    },
+                    {
+                        discount: {
+                            [Op.gte]: 40
+                        }
+                    },
+                    {
+                        deleted:0
+                    }
+                ]
+            },
+            include: [
+                {association: "images"}
+            ]
+        })
         
-        
-            res.render("home", {destacados, ofertas, novedades})
-        
+        let ofertas = db.product.findAll({
+            where: {
+                [Op.and]: [
+                {
+                    discount: {[Op.gte] : 30}
+                },
+                {
+                    deleted: 0
+                }
+                ]
+            },
+            include: [
+                {association: "images"}
+            ]
+        })
+
+        let novedades = db.product.findAll({
+            where: {
+                createdAt: {[Op.gte]: moment().subtract(15, 'days').toDate()},
+                deleted: 0
+            },
+            include: [
+                {association: "images"}
+            ]
+        })
+
+        let marcas = db.brand.findAll()
+
+        let colores = db.color.findAll()
+
+        Promise.all([destacados,ofertas,novedades,marcas,colores])
+        .then(function([destacados,ofertas,novedades,marcas,colores])
+        {
+           
+            return res.render("home", {destacados, ofertas, novedades, marcas, colores})
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 }
 

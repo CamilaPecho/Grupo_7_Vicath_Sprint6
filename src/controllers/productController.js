@@ -1,7 +1,7 @@
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 const db = require("../database/models");
 const { Op } = require("sequelize");
-const brand = require("../database/models/brand");
+
 const productController = {
 
     all:(req,res)=>{
@@ -9,7 +9,6 @@ const productController = {
             include: [{association: "images"}]
         })
         .then(productos => {
-            //return res.send(productos[0].images)
             res.render("./products/results",{productos})
         })
         .catch(function(error)
@@ -21,7 +20,14 @@ const productController = {
     search:(req,res)=>{
         let productos = db.product.findAll({
             where: {
-                name: {[Op.like]: req.query.busqueda + "%"}
+                [Op.and]: [
+                    {
+                        name: {[Op.like]: req.query.busqueda + "%"}
+                    },
+                    {
+                        deleted: 0
+                    }
+                ]
             },
             include: [{association: "images"}],
             limit: 6,
@@ -29,7 +35,14 @@ const productController = {
         })
         let cantidadTotal = db.product.findAll({
             where: {
-                name: {[Op.like]: req.query.busqueda + "%"}
+                [Op.and]: [
+                    {
+                        name: {[Op.like]: req.query.busqueda + "%"}
+                    },
+                    {
+                        deleted: 0
+                    }
+                ]
             },
             include: [{association: "images"}],
         })
@@ -37,7 +50,6 @@ const productController = {
         Promise.all([productos, cantidadTotal])
         .then(function([productos, cantidadTotal])
         {
-          
             return res.render("./products/results", {productos, cantidadTotal})
         })
         .catch(error => {
@@ -46,26 +58,46 @@ const productController = {
     },
 
     filter:(req,res)=>{
-        console.log("-----------------------------------------------")
         db.product.findAll({
             include: [{association: "images"},
             {
                 association: "brand", 
                 where: {
-                    name: {[Op.like]: req.query.marcas}
+                    [Op.and]: [
+                        {
+                            name: {[Op.like]: req.query.marcas}
+                        },
+                        {
+                            deleted: 0
+                        }
+                    ]
                     },
                 required: false
             }, 
             {
                 association: "color",
                 where: {
-                    name: {[Op.like]: req.query.colores}
+                    [Op.and]: [
+                        {
+                            name: {[Op.like]: req.query.colores}
+                        },
+                        {
+                            deleted: 0
+                        }
+                    ]
                 },
                 required: false
             }
                     ],
             where: {
-                price: {[Op.gte]: req.query.precio}
+                [Op.and]: [
+                    {
+                        price: {[Op.gte]: req.query.precio}
+                    },
+                    {
+                        deleted: 0
+                    }
+                ]
             }
         })
         .then(function(productos)
@@ -79,18 +111,11 @@ const productController = {
         })
     },
 
-    novedades: (req, res)=>{
+    news: (req, res)=>{
         db.product.findAll({
             where: {
-                //Por si te preguntas, lo que hace es a la fecha actual le resta 15
-                //dias y compara con la fecha que esta en el registro, si esa
-                //fecha que esta en el registro es mayor a la diferencia que 
-                //hicimos al principio significa que aún es una novedad.
-                //Si fuese menor significa que ya pasó de moda y ya no estaria en 
-                //novedades.
-
-                //Obviamente si creas productos en el mismo instante o dia, todas te van
-                //a aparecer como novedades
+                //Lo que hace es a la fecha actual le resta 15
+                //dias y compara con la fecha que esta en el registro, significa que aún es una novedad.
                 createdAt: {[Op.gte]: moment().subtract(15, 'days').toDate()} 
             },
             include: [
@@ -116,7 +141,6 @@ const productController = {
         {
             let productos = respuesta.filter(function(one)
             {
-                
                 return one.category.name == req.params.categoria
             }
             )
@@ -149,37 +173,46 @@ const productController = {
      },
 
      viewProducts:(req,res) =>{
-       
-        res.render("./products/listProducts",{products})
+        db.product.findAll({
+            include: [
+                {association: "category"}
+            ],
+            where:{
+                deleted:0
+            }
+        })
+        .then( products => 
+            res.render("./products/listProducts",{products})
+        )
     },
 
     viewProductAdd: (req,res) =>{
-        db.Category.findAll()
-            .then( categories => {
-                db.Brand.findAll()
-                .then( brands => {
-                    db.Color.findAll()
-                    .then( colors => {
-                        res.render('./products/productAdd', {brands,categories,colors})
-                    })
-                    .catch(error => res.send(error))
-                })
-                .catch(error => res.send(error))
-            })
-            .catch(error => res.send(error))
+        let categories =  db.category.findAll();
+        let brands = db.brand.findAll();
+        let colors = db.color.findAll();
+
+        Promise.all([categories,brands,colors])
+        .then(function([categories,brands,colors])
+        {
+            res.render('./products/productAdd', {brands,categories,colors})           
+        })
+        .catch(err => {
+             res.send(error)
+        })
+
     },
 
     productAdd: (req,res) =>{
-        let imagenes= []
+        let images= []
 
         if(req.files != undefined){
             for(let i = 0 ; i<req.files.length;i++){
-                imagenes.push(req.files[i].filename)
+                images.push(req.files[i].filename)
             }
         }
 
-        db.Product.create({
-            title:req.body.title.toUpperCase(),
+        db.product.create({
+            name:req.body.name,
             price:req.body.price,
             description: req.body.description,
             stock:req.body.stock,
@@ -194,51 +227,54 @@ const productController = {
             deleted: 0,
         })
         .then( product =>{
-            for(let i = 0 ; i<imagenes.length;i++){
-                db.Image.Create({
-                    name: imagenes[i],
-                    product_id: product.Id
+            
+            if ( images.length != 0){
+                for(let i = 0 ; i<images.length;i++){
+                    db.image.create({
+                        name: images[i],
+                        product_id: product.id
+                    })
+                }
+            }else{
+            db.image.create({
+                    name: "default.jpg",
+                    product_id: product.id
                 })
-                .then( () => {
-                    res.redirect('/products/viewProducts')
-                })
-                .catch(error => res.send(error))
             }
+
+            res.redirect('/products/viewProducts')
         })
         .catch(error => res.send(error))
     },
 
     viewProductEdit:(req,res)=>{
-        db.Product.findByPk(req.params.id)
-        .then( product => {
-            db.Category.findAll()
-                .then( categories => {
-                    db.Brand.findAll()
-                    .then( brands => {
-                        db.Color.findAll()
-                        .then( colors => {
-                            res.render('./products/productEdit', {product,brands,categories,colors})
-                        })
-                        .catch(error => res.send(error))
-                    })
-                    .catch(error => res.send(error))
-                })
-                .catch(error => res.send(error))
+        let product = db.product.findByPk(req.params.id);
+        let categories =  db.category.findAll();
+        let brands = db.brand.findAll();
+        let colors = db.color.findAll();
+
+        Promise.all([product,categories,brands,colors])
+        .then(function([producto,categories,brands,colors])
+        {
+            res.render('./products/productEdit', {producto,brands,categories,colors})
         })
-        .catch(error => res.send(error))
+        .catch(err => {
+             res.send(error)
+        })
+                        
     },
     
     productEdit:(req,res)=>{
-        let imagenes= []
+        let images= []
 
         if(req.files != undefined){
             for(let i = 0 ; i<req.files.length;i++){
-                imagenes.push(req.files[i].filename)
+                images.push(req.files[i].filename)
             }
         }
 
-        db.Product.update({
-            title:req.body.title.toUpperCase(),
+        db.product.update({
+            name:req.body.name,
             price:req.body.price,
             description: req.body.description,
             stock:req.body.stock,
@@ -256,22 +292,53 @@ const productController = {
             where: {id:req.params.id}
         })
         .then( product =>{
-            for(let i = 0 ; i<imagenes.length;i++){
-                db.Image.Create({
-                    name: imagenes[i],
-                    product_id: product.Id
-                })
-                .then( () => {
-                    res.redirect('/products/viewProducts')
-                })
-                .catch(error => res.send(error))
+            if ( images.length != 0){
+
+                db.image.destroy(
+                    {
+                        where: { product_id: req.params.id },
+                        force: true
+                    })
+
+                for(let i = 0 ; i<images.length;i++){
+                    db.image.create(
+                    {
+                        name: images[i],
+                        product_id: req.params.id
+                    })
+                }
             }
+            res.redirect('/products/viewProducts')
         })
         .catch(error => res.send(error))
     },
 
+    productDetailAdmin:(req, res)=>{
+        db.product.findByPk(req.params.id,
+         {
+             include: [{association: "images"},{association: "brand"},{association: "category"},{association: "color"}]
+         })
+        .then(function(producto)
+            {
+                return res.render("./products/productDetailAdmin", {producto})
+            })
+        .catch(function(error)
+        {
+            console.log(error)
+        })
+         
+     },
+    
     productDelete:(req,res)=>{
-        res.redirect("/products/viewProducts")
+        db.product.update({
+            deleted: 1,
+        },
+        {
+            where: {id:req.params.id}
+        })
+        .then( () => {
+            res.redirect('/products/viewProducts')
+        })
     }
 
 }

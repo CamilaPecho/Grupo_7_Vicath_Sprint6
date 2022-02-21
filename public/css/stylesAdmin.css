@@ -44,23 +44,8 @@
     border-radius: 10px;
 }
 
-
-.tablaUsers{
-    width: 90%;
-    margin: 10px auto;
-    padding: 10px;
-    background-color: #F3F0D7;
-    border-radius: 10px;
-}
-
 .tabla table{
     table-layout: fixed;
-    width: 100%;
-    border-collapse: collapse;
-    
-}
-
-.tablaUsers table{
     width: 100%;
     border-collapse: collapse;
     
@@ -69,14 +54,40 @@
 .tabla table th {
     text-align: left;
 }
+#nombre{
+    display:table-cell;
+}
+#descripcion,#precio,#categoria{
+    display: none;
+}
+
+
+/*--------------TABLA USUARIOS------------------*/
+.tablaUsers{
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #F3F0D7;
+    border-radius: 10px;
+}
+
+.tablaUsers table{
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+
 .tablaUsers table th {
     text-align: left;
 }
 
+.botonesTabla{
+    display: flex;
+    justify-content: flex-end;
+}
+/*-------------- FIN TABLA USUARIOS------------------*/
 
- 
-
-button.crearProducto, .botonEditar{
+button.crearProducto{
     margin: 10px 5px;
     font-size: 16px;
     padding: 6px;
@@ -85,21 +96,61 @@ button.crearProducto, .botonEditar{
     border: 0;
     border-radius: 10px;
     box-shadow: -4px 4px 2px #B0B8FF;
+}
+
+.botonEditar {
+    margin: 5px;
+    font-size: 15px;
+    padding: 5px;
+    color: #F3F0D7;
+    background-color: #FF7070;
+    border: 0;
+    border-radius: 10px;
 }
 
 button.botonEliminar{
-    margin: 10px 5px;
-    font-size: 16px;
-    padding: 6px;
+    margin: 5px;
+    font-size: 15px;
+    padding: 5px;
     color: #F3F0D7;
-    background-color:#FF7070;
+    background-color: #FF7070;
     border: 0;
     border-radius: 10px;
-    box-shadow: -4px 4px 2px #B0B8FF;
 }
 
 /*--------------FIN LISTA DE PRODUCTOS------------------*/
+/*--------------DETALLE DEL PRODUCTO ------------------*/
+.contenedorDetalle{
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #F3F0D7;
+    border-radius: 10px;
+    text-align: center;
+}
 
+.contenedorDetalle .dato{
+    background-color: #ebebeb;
+}
+
+.productData, .inputsData{
+    padding: 10px;
+}
+
+.productData h4{
+    text-align: left;
+    padding: 5px;
+}
+
+.imagesDetail{
+    padding: 10px;
+}
+
+.detail{
+    width: 100%;
+}
+
+/*-------------- FIN DETALLE DEL PRODUCTO ------------------*/
 /*------------------MAIN CREAR PRODUCTO------------------*/
 
 .contenedorCrear{
@@ -112,15 +163,19 @@ button.botonEliminar{
 }
 
 .crear div{
-    margin: 20px;
+    margin: 10px;
 }
 
-.crear .dato{
+.dato{
     border:0;
     padding: 10px;
     width: 100%;
     border-radius: 15px;
     box-shadow: -4px 4px 2px #B0B8FF;
+}
+
+.imagen{
+    text-align: left;
 }
 
 .crear div select{
@@ -151,9 +206,17 @@ button.botonCrear, .botonCancelar{
 /*--------adaptaciones------------*/
 
 
-@media(min-width: 361px) {
+@media(min-width: 430px) {
     
     /*--------parte del listaproduct-----*/
+
+    .contenedorDetalle{
+        width: 75%;
+    }
+
+    #descripcion{
+        display: table-cell;
+    }
     
 }
 
@@ -161,19 +224,73 @@ button.botonCrear, .botonCancelar{
 @media (min-width:769px){
 
     /*--------parte del listaproduct-----*/
-
-    #descripcion{
-        display: block;
+    #precio,#categoria{
+        display: table-cell;
     }
 
     .filtradoLista div select{
         width: 20%;
+    }
+
+    .datosTabla{
+        border-right: 1px solid #FF7070;
+    }
+
+    button{
+        cursor: pointer;
+    }
+
+    .botonEditar{
+        margin: 10px 5px;
+        font-size: 16px;
+        padding: 6px;
+        color: #F3F0D7;
+        background-color:#FF7070;
+        border: 0;
+        border-radius: 10px;
+        box-shadow: -4px 4px 2px #B0B8FF;
+    }
+
+    button.botonEliminar{
+        margin: 10px 5px;
+        font-size: 16px;
+        padding: 6px;
+        color: #F3F0D7;
+        background-color:#FF7070;
+        border: 0;
+        border-radius: 10px;
+        box-shadow: -4px 4px 2px #B0B8FF;
+    }
+    /*--------parte del product add-----*/
+    .contenedorCrear{
+        width: 45%;
         
     }
 
-    /*--------parte del product add-----*/
-    .contenedorCrear{
-        width: 55%;
-        
+    /*--------parte del product detail-----*/
+    .contenedorDetalle {
+        width: 50%;
+    }
+
+    .imagesDetail {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .detail {
+        width: 25%;
+        padding: 5px;
+    }
+
+    .inputs{
+        text-align: left;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .inputsData {
+        padding: 10px;
+        width: 100%;
     }
 }
