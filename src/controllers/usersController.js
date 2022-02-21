@@ -81,23 +81,24 @@ const userController = {
 
         const resultadosValidaciones = validationResult(req);
                 
-            if(!resultadosValidaciones.isEmpty())
-            {
-                return res.render('./users/register', {errors: resultadosValidaciones.mapped(), datosViejos: req.body})
-            }
+        if(!resultadosValidaciones.isEmpty())
+        {
+            return res.render('./users/register', {errors: resultadosValidaciones.mapped(), datosViejos: req.body})
+        }
 
 
         let usuarioEncontrado = users.buscardorPorCategoriaIndividual('mail', req.body.email)
 
-        if(usuarioEncontrado){
-            return res.render('./users/register',{errors: {
-                email: {
-                    msg:"Este mail ya esta registrado"
-                }, datosViejos: req.body
-            }})
-        }
+        db.users.findOne({
+            where: {
+                email: {[Op.like]: req.body.email}
+            }
+    })
+    .then(function(){
+        return res.render('./users/register',{errors: {
+            email: { msg:"Este mail ya esta registrado" }}, datosViejos: req.body})
+        })
 
-       
         let contraseñaEncriptada;
 
         if(req.body.contrasenia == req.body.contrasenia2 ){
@@ -110,8 +111,20 @@ const userController = {
             }})
         }
         
-        res.redirect("/login")
-    },
+                db.users.create({
+                avatar: req.file? req.file.filename: "default.jpg",
+                first_name: req.body.nombre,
+                last_name: req.body.apellido,
+                phone_number: req.body.telefono,
+                email: req.body.email,
+                password: req.body.contrasenia,
+                rol_id:1
+            })
+            .then(res.redirect("/login"))
+            .catch(error => res.send (error))
+            }
+    ,
+
 
     verPerfil:(req,res)=>{
         if(req.session.usuarioLogeado.rol_id == 2)
