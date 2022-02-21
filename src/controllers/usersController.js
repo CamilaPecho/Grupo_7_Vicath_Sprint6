@@ -83,20 +83,19 @@ const userController = {
                 
         if(!resultadosValidaciones.isEmpty())
         {
-            return res.render('./users/register', {errors: resultadosValidaciones.mapped(), datosViejos: req.body})
+            return res.render('./users/register', {errors: resultadosValidaciones.mapped(), usuarioDatos: req.body})
         }
 
 
-        let usuarioEncontrado = users.buscardorPorCategoriaIndividual('mail', req.body.email)
 
-        db.users.findOne({
+        db.user.findOne({
             where: {
                 email: {[Op.like]: req.body.email}
             }
     })
     .then(function(){
         return res.render('./users/register',{errors: {
-            email: { msg:"Este mail ya esta registrado" }}, datosViejos: req.body})
+            email: { msg:"Este mail ya esta registrado" }}, usuarioDatos: req.body})
         })
 
         let contraseñaEncriptada;
@@ -107,11 +106,11 @@ const userController = {
             return res.render('./users/register',{errors: {
                 contrasenia: {
                     msg:"Las contraseñas no coinciden"
-                }, datosViejos: req.body
+                }, userDatos: req.body
             }})
         }
         
-                db.users.create({
+                db.user.create({
                 avatar: req.file? req.file.filename: "default.jpg",
                 first_name: req.body.nombre,
                 last_name: req.body.apellido,
@@ -133,10 +132,187 @@ const userController = {
         }
         else{res.render('./users/perfil', {usuarioDatos: req.session.usuarioLogeado});}
         
-    }
-    ,
+    },
 
-    verPerfilAdmin:(req,res)=>{
+    editVista: (req,res)=>{
+        return res.render('./users/editPerfil', {usuarioDatos: req.session.usuarioLogeado})
+    },
+
+    editEmailAndPass: (req,res)=>{
+        let idUsuario = req.params.id
+        return res.render('./users/editMailAndPass', {idUsuario})
+    },
+
+    editEmailAndPassPUT: (req,res)=>
+    {
+        const resultadosValidaciones = validationResult(req);
+                
+        if(!resultadosValidaciones.isEmpty())
+        {
+            return res.render('./users/editMailAndPass', {errors: resultadosValidaciones.mapped(), idUsuario: req.params.id})
+        }
+        
+        
+        db.user.findOne({
+            where: {
+                email: {[Op.like]: req.body.email}
+            }
+        })
+        .then(function(resultado)
+        {
+            if(resultado)
+            {
+                //return res.send("lo encontre")
+                return res.render('./users/editMailAndPass',{errors: {
+                    email: { msg:"Este mail ya esta registrado o fue su anterior mail" }}
+                , idUsuario: req.params.id})
+            }
+            else{
+                //return res.send("no lo encontre")
+                if(req.body.contrasenia == req.body.contrasenia2 ){
+                    //contraseniaEncriptada = bcript.hashSync(req.body.contrasenia,12) 
+                }else{
+                    return res.render('./users/editMailAndPass',{errors: {
+                        contrasenia: {
+                            msg:"Las contraseñas no coinciden"
+                        }
+                    }, idUsuario: req.params.id})
+                }
+    
+                //Acá viene el update
+                db.user.update({
+                    email: req.body.email,
+                    password: req.body.contrasenia
+                }, {
+                    where: {id: req.params.id}
+                })
+                .then(function(respuestaUpdate)
+                {
+                    db.user.findOne({
+                        where: {
+                            email: {[Op.like]: req.body.email}
+                        }
+                    })
+                    .then(function(usuarioEncontrado)
+                    {
+                        delete usuarioEncontrado.contrasenia;
+                        req.session.usuarioLogeado = usuarioEncontrado;
+                       
+                        return res.redirect("/profile")
+                    })
+                    .catch(err =>{
+                        console.log("se rompio pa")
+                    })
+                })
+                .catch(error => res.send (error))
+            
+            }
+        })
+    
+        
+        /*.then(function(usuarioEncontrado)
+        {
+            
+            return res.render('./users/editMailAndPass',{errors: {
+                email: { msg:"Este mail ya esta registrado o fue su anterior mail" }}
+            , idUsuario: req.params.id})
+        })
+        .catch(function()
+        {
+            if(req.body.contrasenia == req.body.contrasenia2 ){
+                //contraseniaEncriptada = bcript.hashSync(req.body.contrasenia,12) 
+            }else{
+                return res.render('./users/editMailAndPass',{errors: {
+                    contrasenia: {
+                        msg:"Las contraseñas no coinciden"
+                    }
+                }, idUsuario: req.params.id})
+            }
+
+            //Acá viene el update
+            db.user.update({
+                email: req.body.email,
+                password: req.body.contrasenia
+            }, {
+                where: {id: req.params.id}
+            })
+            .then(function(respuestaUpdate)
+            {
+                db.user.findOne({
+                    where: {
+                        email: {[Op.like]: req.body.email}
+                    }
+                })
+                .then(function(usuarioEncontrado)
+                {
+                    delete usuarioEncontrado.contrasenia;
+                    req.session.usuarioLogeado = usuarioEncontrado;
+                    alert("Correo y contraseña cambiadas con éxito")
+                    return res.redirect("/profile")
+                })
+                .catch(err =>{
+                    console.log("se rompio pa")
+                })
+            })
+            .catch(error => res.send (error))
+        
+
+        })
+        */
+        
+    },
+
+    edit: (req,res)=>{
+        const resultadosValidaciones = validationResult(req);
+                
+        if(!resultadosValidaciones.isEmpty())
+        {
+            return res.render('./users/editPerfil', {errors: resultadosValidaciones.mapped(), usuarioDatos: req.session.usuarioLogeado})
+        }
+        else{
+            db.user.update({
+                first_name: req.body.nombre,
+                last_name: req.body.apellido,
+                avatar: (req.file)?req.file.filename:req.session.usuarioLogeado.avatar,
+                phone_number: req.body.telefono,
+                rol_id:1
+            }, {
+                where: {id: req.params.id}
+            })
+            .then(function(respuestaUpdate)
+            {
+                
+                //Forzamos a actualizar el session para ver los datos en tiempo real
+                //req.session.usuarioLogeado.first_name = req.body.nombre
+                //req.session.usuarioLogeado.last_name = req.body.apellido
+                //req.session.usuarioLogeado.phone_number = req.body.telefono
+                //req.session.usuarioLogeado.avatar = req.file.filename
+
+                //
+                db.user.findOne({
+                    where: {
+                        email: {[Op.like]: req.session.usuarioLogeado.email}
+                    }
+                })
+                .then(function(usuarioEncontrado)
+                {
+                    delete usuarioEncontrado.contrasenia;
+                    req.session.usuarioLogeado = usuarioEncontrado;
+                    return res.redirect("/profile")
+                })
+                .catch(err =>{
+                    console.log("se rompio pa")
+                })
+            })
+            .catch(error => res.send (error))
+        }
+
+        
+    
+
+    },
+
+    verPerfilAdmin: (req,res)=>{
         
         res.render('./users/perfilAdmin', {usuarioDatos: req.session.usuarioLogeado});  
     },

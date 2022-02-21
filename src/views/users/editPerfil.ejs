@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/stylesHeader-Footer.css">
+    <link rel="stylesheet" href="/css/stylesRegister.css">
+</head>
+<body>
+    <%- include('../partials/header') %> 
+    <main class="register">
+        <div>
+        <form action="/edit/<%= usuarioDatos.id %>?_method=PUT" method="POST" class="continuar" enctype="multipart/form-data">
+            <h3>Editá tus datos</h3>
+            <h4> <i class="fas fa-user-circle"></i> Datos Personales<br></h4>
+            <div >
+                <input class="dato" type="file" name="avatar" id="avatar" > 
+            </div>
+            <% if (locals.errors && errors.avatar) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.avatar.msg %></p>
+                </div> 
+            <% } %>
+            <div >
+                <input class="dato" type="text" name="nombre" id="nombre" minlength="3" value= "<%= locals.usuarioDatos? usuarioDatos.first_name:null %>" placeholder="Nombre" > 
+            </div>
+            <% if (locals.errors && errors.nombre) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.nombre.msg %></p>
+                </div> 
+            <% } %>
+            <div >
+                <input class="dato"type="text" name="apellido" id="apeliido" minlength="3" value= "<%= locals.usuarioDatos? usuarioDatos.last_name:null %>" placeholder="Apellido" >  
+            </div>
+            <% if (locals.errors && errors.apellido) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.apellido.msg %></p>
+                </div> 
+            <% } %>
+            <div>
+                <input class="dato"type="text" name="telefono" id="telefono" minlength="10" value="<%= locals.usuarioDatos? usuarioDatos.phone_number:null %>" placeholder="Telefono movil" > 
+            </div>
+            <% if (locals.errors && errors.telefono) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.telefono.msg %></p>
+                </div> 
+            <% } %>
+            
+            
+
+            <div class = "botones">
+                <button class= "botonRegistro" type="submit"> editar </button>
+                <button class= "botonRegistro" type="reset"> cancelar </button>
+            </div>
+        </form>
+        </div>
+       
+    </main>
+    <%- include('../partials/footer') %> 
+</body>
+</html>
