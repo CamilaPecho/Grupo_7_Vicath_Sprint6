@@ -16,7 +16,6 @@ router.get('/register', guestMiddleware, userController.viewRegister);
 router.post('/register',avatarProfile.single('avatar'),validacionesRegister, userController.register);
 
 router.get('/profile', authMiddleware, userController.verPerfil)
-<<<<<<< HEAD
 
 router.get("/edit/:id", userController.editVista)
 router.put("/edit/:id", avatarProfile.single('avatar'), validacionesEdit, userController.edit)
@@ -24,9 +23,6 @@ router.put("/edit/:id", avatarProfile.single('avatar'), validacionesEdit, userCo
 router.get("/changeEmailAndPass/:id", userController.editEmailAndPass)
 router.put("/changeEmailAndPass/:id", validacionesEmailAndPass, userController.editEmailAndPassPUT)
 
-=======
-router.get('/modocliente', userController.modoCliente)
->>>>>>> ad62f37102552a5b0270c870592bdd0a9e634cd0
 router.get('/homeAdmin', userController.homeAdmin)
 
 router.get('/logout', userController.logout)

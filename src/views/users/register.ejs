@@ -18,7 +18,7 @@
             <h3>Registrate</h3>
             <h4> <i class="fas fa-user-circle"></i> Datos Personales<br></h4>
             <div >
-                <input class="dato" type="file" name="avatar" id="avatar" value= "<%= locals.datosViejos? datosViejos.avatar:null %>" accept=".jpg,.png" > 
+                <input class="dato" type="file" name="avatar" id="avatar" value= "<%= locals.usuarioDatos? usuarioDatos.avatar:null %>" accept=".jpg,.png" > 
             </div>
             <% if (locals.errors && errors.avatar) { %>
                 <div class="errorValidacion">
@@ -26,7 +26,7 @@
                 </div> 
             <% } %>
             <div >
-                <input class="dato" type="text" name="nombre" id="nombre" minlength="3" value= "<%= locals.datosViejos? datosViejos.nombre:null %>" placeholder="Nombre" > 
+                <input class="dato" type="text" name="nombre" id="nombre" minlength="3" value= "<%= locals.usuarioDatos? usuarioDatos.nombre:null %>" placeholder="Nombre" > 
             </div>
             <% if (locals.errors && errors.nombre) { %>
                 <div class="errorValidacion">
@@ -34,7 +34,7 @@
                 </div> 
             <% } %>
             <div >
-                <input class="dato"type="text" name="apellido" id="apeliido" minlength="3" value= "<%= locals.datosViejos? datosViejos.apellido:null %>" placeholder="Apellido" >  
+                <input class="dato"type="text" name="apellido" id="apeliido" minlength="3" value= "<%= locals.usuarioDatos? usuarioDatos.apellido:null %>" placeholder="Apellido" >  
             </div>
             <% if (locals.errors && errors.apellido) { %>
                 <div class="errorValidacion">
@@ -42,7 +42,7 @@
                 </div> 
             <% } %>
             <div>
-                <input class="dato"type="text" name="telefono" id="telefono" minlength="10" value="<%= locals.datosViejos? datosViejos.telefono:null %>" placeholder="Telefono movil" > 
+                <input class="dato"type="text" name="telefono" id="telefono" minlength="10" value="<%= locals.usuarioDatos? usuarioDatos.telefono:null %>" placeholder="Telefono movil" > 
             </div>
             <% if (locals.errors && errors.telefono) { %>
                 <div class="errorValidacion">
@@ -50,7 +50,7 @@
                 </div> 
             <% } %>
             <div >
-                <input class="dato" type="email" name="email" id="email" value= "<%= locals.datosViejos? datosViejos.email:null %>" placeholder="Correo Electronico" >
+                <input class="dato" type="email" name="email" id="email" value= "<%= locals.usuarioDatos? usuarioDatos.email:null %>" placeholder="Correo Electronico" >
             </div>
             <% if (locals.errors && errors.email) { %>
                 <div class="errorValidacion">

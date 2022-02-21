@@ -11,58 +11,55 @@ const userController = {
 
     login: (req,res) =>{
     
-    const resultadosValidaciones = validationResult(req);
-    
-    if(!resultadosValidaciones.isEmpty())
-    {
-        return res.render('./users/login', {errors: resultadosValidaciones.mapped()})
-    }
-    
-    //Ahora voy a validar si existe en la BD y tirar su respectivo error a la vista en caso de acierto
-    db.user.findOne({
-        where: {
-            email: {[Op.like]: req.body.usuario}
-        }
-    })
-    .then(function(usuarioEncontrado)
-    {
-//Ahora valido contraseñas, en caso de exito lo guardo en session
-    
-    //let contraseniaOk = bcript.compareSync(req.body.contrasenia, usuarioEncontrado.contraseña);
-        if(req.body.contrasenia == usuarioEncontrado.password)
+        const resultadosValidaciones = validationResult(req);
+        
+        if(!resultadosValidaciones.isEmpty())
         {
-            console.log("entre pa");
-            delete usuarioEncontrado.password;
-            req.session.usuarioLogeado = usuarioEncontrado;
-            
-            //aca vemos si esta activo el checkbox de recordame, y si lo esta despierto mi cookie
-            if(req.body.recordarme)
-            {
-                res.cookie("mailCookie", req.body.usuario, { maxAge: (1000 * 60) * 60 }) 
-                //guardamos sólo el mail porque con eso es suficiente pa buscar en la BD, 
-                //además la cookie de este estilo tiene un limite de 4kb y hay q ser los más optimos posibles
-            }
-            console.log("entrando a perfil")
-            
-            return res.redirect('/profile')
+            return res.render('./users/login', {errors: resultadosValidaciones.mapped()})
         }
-        else
+        
+        //Ahora voy a validar si existe en la BD y tirar su respectivo error a la vista en caso de acierto
+        db.user.findOne({
+            where: {
+                email: {[Op.like]: req.body.usuario}
+            }
+        })
+        .then(function(usuarioEncontrado)
+        {
+            //Ahora valido contraseñas, en caso de exito lo guardo en session
+            //let contraseniaOk = bcript.compareSync(req.body.contrasenia, usuarioEncontrado.contraseña);
+            let contraseniaOk = bcript.compareSync(req.body.contrasenia, usuarioEncontrado.password);
+            if(contraseniaOk)
+            {
+                delete usuarioEncontrado.password;
+                req.session.usuarioLogeado = usuarioEncontrado;
+                
+                //aca vemos si esta activo el checkbox de recordame, y si lo esta despierto mi cookie
+                if(req.body.recordarme)
+                {
+                    res.cookie("mailCookie", req.body.usuario, { maxAge: (1000 * 60) * 60 }) 
+                    //guardamos sólo el mail porque con eso es suficiente pa buscar en la BD, 
+                    //además la cookie de este estilo tiene un limite de 4kb y hay q ser los más optimos posibles
+                }
+                return res.redirect('/profile')
+            }
+            else
+            {
+                return res.render('./users/login', {errors: {
+                    usuario: {
+                        msg: "Credenciales invalidas!"
+                    }
+                }, oldData: req.body})
+            }
+        })
+        .catch(function(error)
         {
             return res.render('./users/login', {errors: {
                 usuario: {
-                    msg: "Credenciales invalidas!"
+                    msg: "No se encontró este usuario en nuestro sistema!"
                 }
-            }, oldData: req.body})
-        }
-    })
-    .catch(function(error)
-    {
-        return res.render('./users/login', {errors: {
-            usuario: {
-                msg: "No se encontró este usuario en nuestro sistema!"
-            }
-        }})
-    })
+            }})
+        })
 
     
     },
@@ -80,59 +77,55 @@ const userController = {
     register:(req,res)=>{
 
         const resultadosValidaciones = validationResult(req);
-                
+        let contraseñaEncriptada;        
         if(!resultadosValidaciones.isEmpty())
         {
             return res.render('./users/register', {errors: resultadosValidaciones.mapped(), usuarioDatos: req.body})
         }
 
-
-
         db.user.findOne({
             where: {
                 email: {[Op.like]: req.body.email}
             }
-    })
-    .then(function(){
-        return res.render('./users/register',{errors: {
-            email: { msg:"Este mail ya esta registrado" }}, usuarioDatos: req.body})
         })
-
-        let contraseñaEncriptada;
-
-        if(req.body.contrasenia == req.body.contrasenia2 ){
-            contraseñaEncriptada = bcript.hashSync(req.body.contrasenia,12) 
-        }else{
-            return res.render('./users/register',{errors: {
-                contrasenia: {
-                    msg:"Las contraseñas no coinciden"
-                }, userDatos: req.body
-            }})
-        }
-        
+        .then(user =>{
+            if(user != null){
+                return res.render('./users/register',{errors: {
+                    email: { msg:"Este mail ya esta registrado" }}, usuarioDatos: req.body})
+                }
+            else{
+                if(req.body.contrasenia == req.body.contrasenia2 ){
+                    contraseñaEncriptada = bcript.hashSync(req.body.contrasenia,12) 
+                }else{
+                    return res.render('./users/register',{errors: {
+                        contrasenia: {
+                            msg:"Las contraseñas no coinciden"
+                        }
+                    },usuarioDatos: req.body})
+                }
+            
                 db.user.create({
-                avatar: req.file? req.file.filename: "default.jpg",
-                first_name: req.body.nombre,
-                last_name: req.body.apellido,
-                phone_number: req.body.telefono,
-                email: req.body.email,
-                password: req.body.contrasenia,
-                rol_id:1
+                    avatar: req.file? req.file.filename: "default.jpg",
+                    first_name: req.body.nombre,
+                    last_name: req.body.apellido,
+                    phone_number: req.body.telefono,
+                    email: req.body.email,
+                    password: contraseñaEncriptada,
+                    rol_id:1
+                })
+                .then(res.redirect("/login"))
+                .catch(error => res.send (error))
+                }
             })
-            .then(res.redirect("/login"))
-            .catch(error => res.send (error))
-            }
-    ,
-
+        },
 
     verPerfil:(req,res)=>{
         if(req.session.usuarioLogeado.rol_id == 2)
         {
             return res.redirect('/homeAdmin');
+        }else{
+            res.render('./users/perfil', {usuarioDatos: req.session.usuarioLogeado});
         }
-        else{res.render('./users/perfil', {usuarioDatos: req.session.usuarioLogeado});}
-<<<<<<< HEAD
-        
     },
 
     editVista: (req,res)=>{
@@ -201,66 +194,13 @@ const userController = {
                        
                         return res.redirect("/profile")
                     })
-                    .catch(err =>{
-                        console.log("se rompio pa")
+                    .catch(error =>{
+                        res.send (error)
                     })
                 })
                 .catch(error => res.send (error))
-            
             }
         })
-    
-        
-        /*.then(function(usuarioEncontrado)
-        {
-            
-            return res.render('./users/editMailAndPass',{errors: {
-                email: { msg:"Este mail ya esta registrado o fue su anterior mail" }}
-            , idUsuario: req.params.id})
-        })
-        .catch(function()
-        {
-            if(req.body.contrasenia == req.body.contrasenia2 ){
-                //contraseniaEncriptada = bcript.hashSync(req.body.contrasenia,12) 
-            }else{
-                return res.render('./users/editMailAndPass',{errors: {
-                    contrasenia: {
-                        msg:"Las contraseñas no coinciden"
-                    }
-                }, idUsuario: req.params.id})
-            }
-
-            //Acá viene el update
-            db.user.update({
-                email: req.body.email,
-                password: req.body.contrasenia
-            }, {
-                where: {id: req.params.id}
-            })
-            .then(function(respuestaUpdate)
-            {
-                db.user.findOne({
-                    where: {
-                        email: {[Op.like]: req.body.email}
-                    }
-                })
-                .then(function(usuarioEncontrado)
-                {
-                    delete usuarioEncontrado.contrasenia;
-                    req.session.usuarioLogeado = usuarioEncontrado;
-                    alert("Correo y contraseña cambiadas con éxito")
-                    return res.redirect("/profile")
-                })
-                .catch(err =>{
-                    console.log("se rompio pa")
-                })
-            })
-            .catch(error => res.send (error))
-        
-
-        })
-        */
-        
     },
 
     edit: (req,res)=>{
@@ -307,17 +247,9 @@ const userController = {
             })
             .catch(error => res.send (error))
         }
-
-        
-    
-
-=======
-       
->>>>>>> ad62f37102552a5b0270c870592bdd0a9e634cd0
     },
 
     verPerfilAdmin: (req,res)=>{
-        
         res.render('./users/perfilAdmin', {usuarioDatos: req.session.usuarioLogeado});  
     },
 
@@ -382,7 +314,6 @@ const userController = {
         Promise.all([destacados,ofertas,novedades,marcas,colores])
         .then(function([destacados,ofertas,novedades,marcas,colores])
         {
-           
             return res.render("home", {destacados, ofertas, novedades, marcas, colores})
         })
         .catch(err => {
