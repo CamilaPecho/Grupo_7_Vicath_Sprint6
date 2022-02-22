@@ -27,7 +27,7 @@
                 <% if (locals.usuarioHeader) { %>
                     <span class="login_desplegable_header">¡Hola! <%= locals.datosUsuarioGlobal.first_name %> </span>
                 <a href="/profileAdmin" class="login_desplegable_perfil">Ver perfil</a><hr>
-                <a href="/edit/<%= locals.datosUsuarioGlobal.id %> " class="login_desplegable_edit">Editar perfil</a><hr>
+                <a href="/edit/<%= locals.datosUsuarioGlobal.id %>" class="login_desplegable_edit">Editar perfil</a><hr>
                 <a href="/logout" class="login_desplegable_close">Cerrar cuenta</a>
                 <% } else{%>
     
