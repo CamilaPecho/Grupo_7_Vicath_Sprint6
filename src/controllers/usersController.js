@@ -24,7 +24,12 @@ const userController = {
         
         if(!resultadosValidaciones.isEmpty())
         {
-            return res.render('./users/login', {errors: resultadosValidaciones.mapped()})
+            db.category.findAll()
+            .then(function(categories)
+            {
+                return res.render('./users/login', {errors: resultadosValidaciones.mapped(), categories})
+            })
+            
         }
         
         //Ahora voy a validar si existe en la BD y tirar su respectivo error a la vista en caso de acierto
@@ -54,20 +59,28 @@ const userController = {
             }
             else
             {
+                db.category.findAll()
+                .then(function(categories)
+                {
                 return res.render('./users/login', {errors: {
                     usuario: {
                         msg: "Credenciales invalidas!"
                     }
-                }, oldData: req.body})
+                }, oldData: req.body, categories})
+                })
             }
         })
         .catch(function(error)
         {
+            db.category.findAll()
+            .then(function(categories)
+            {
             return res.render('./users/login', {errors: {
                 usuario: {
                     msg: "No se encontró este usuario en nuestro sistema!"
                 }
-            }})
+            }, categories})
+            })
         })
 
     
@@ -98,7 +111,11 @@ const userController = {
         let contraseñaEncriptada;        
         if(!resultadosValidaciones.isEmpty())
         {
-            return res.render('./users/register', {errors: resultadosValidaciones.mapped(), usuarioDatos: req.body})
+            db.category.findAll()
+            .then(function(categories)
+            {
+            return res.render('./users/register', {errors: resultadosValidaciones.mapped(), usuarioDatos: req.body, categories})
+            })
         }
 
         db.user.findOne({
@@ -108,18 +125,26 @@ const userController = {
         })
         .then(user =>{
             if(user != null){
+                db.category.findAll()
+                .then(function(categories)
+                {
                 return res.render('./users/register',{errors: {
-                    email: { msg:"Este mail ya esta registrado" }}, usuarioDatos: req.body})
+                    email: { msg:"Este mail ya esta registrado" }}, usuarioDatos: req.body, categories})
+                })
                 }
             else{
                 if(req.body.contrasenia == req.body.contrasenia2 ){
                     contraseñaEncriptada = bcript.hashSync(req.body.contrasenia,12) 
                 }else{
+                    db.category.findAll()
+                    .then(function(categories)
+                    {
                     return res.render('./users/register',{errors: {
                         contrasenia: {
                             msg:"Las contraseñas no coinciden"
                         }
-                    },usuarioDatos: req.body})
+                    },usuarioDatos: req.body, categories})
+                    })
                 }
             
                 db.user.create({
@@ -179,7 +204,11 @@ const userController = {
                 
         if(!resultadosValidaciones.isEmpty())
         {
-            return res.render('./users/editMailAndPass', {errors: resultadosValidaciones.mapped(), idUsuario: req.params.id})
+            db.category.findAll()
+            .then(function(categories)
+            {
+            return res.render('./users/editMailAndPass', {errors: resultadosValidaciones.mapped(), idUsuario: req.params.id, categories})
+            })
         }
         
         
@@ -193,20 +222,28 @@ const userController = {
             if(resultado)
             {
                 //return res.send("lo encontre")
+                db.category.findAll()
+                .then(function(categories)
+                {
                 return res.render('./users/editMailAndPass',{errors: {
                     email: { msg:"Este mail ya esta registrado o fue su anterior mail" }}
-                , idUsuario: req.params.id})
+                , idUsuario: req.params.id, categories})
+                })
             }
             else{
                 //return res.send("no lo encontre")
                 if(req.body.contrasenia == req.body.contrasenia2 ){
                     //contraseniaEncriptada = bcript.hashSync(req.body.contrasenia,12) 
                 }else{
+                    db.category.findAll()
+                    .then(function(categories)
+                    {
                     return res.render('./users/editMailAndPass',{errors: {
                         contrasenia: {
                             msg:"Las contraseñas no coinciden"
                         }
-                    }, idUsuario: req.params.id})
+                    }, idUsuario: req.params.id, categories})
+                })
                 }
     
                 //Acá viene el update
@@ -244,7 +281,11 @@ const userController = {
                 
         if(!resultadosValidaciones.isEmpty())
         {
-            return res.render('./users/editPerfil', {errors: resultadosValidaciones.mapped(), usuarioDatos: req.session.usuarioLogeado})
+            db.category.findAll()
+            .then(function(categories)
+            {
+            return res.render('./users/editPerfil', {errors: resultadosValidaciones.mapped(), usuarioDatos: req.session.usuarioLogeado, categories})
+            })
         }
         else{
             
