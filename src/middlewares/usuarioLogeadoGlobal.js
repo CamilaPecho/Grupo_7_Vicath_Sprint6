@@ -30,11 +30,12 @@ function usuarioLogeadoGlobal(req, res, next)
         
         res.locals.usuarioHeader = true;
         res.locals.datosUsuarioGlobal = req.session.usuarioLogeado;
-    }
-    if(req.session && req.session.usuarioLogeado.rol_id == 2)
-    {
+        if(req.session.usuarioLogeado.rol_id == 2)
+        {
         res.locals.usuarioHeaderAdmin = true; 
+        }
     }
+    
 
     next(); //va por fuera de todo porque imaginate la primera vez..., no entra en ningún if 
 }
