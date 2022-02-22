@@ -168,7 +168,7 @@ const userController = {
         
         if(req.session.usuarioLogeado.rol_id == 2)
         {
-            return res.redirect('/perfilAdmin');
+            return res.redirect('/profileAdmin');
         }else{
             Promise.all([categories])
             .then(function(categories)
