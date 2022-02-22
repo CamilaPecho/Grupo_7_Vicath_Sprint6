@@ -50,7 +50,7 @@ const userController = {
                     //guardamos sólo el mail porque con eso es suficiente pa buscar en la BD, 
                     //además la cookie de este estilo tiene un limite de 4kb y hay q ser los más optimos posibles
                 }
-                return res.redirect('/profile')
+                return res.redirect('/')
             }
             else
             {
@@ -138,11 +138,12 @@ const userController = {
         },
 
     verPerfil:(req,res)=>{
+
         let categories = db.category.findAll()
         
         if(req.session.usuarioLogeado.rol_id == 2)
         {
-            return res.redirect('/homeAdmin');
+            return res.redirect('/perfilAdmin');
         }else{
             Promise.all([categories])
             .then(function(categories)
@@ -246,15 +247,31 @@ const userController = {
             return res.render('./users/editPerfil', {errors: resultadosValidaciones.mapped(), usuarioDatos: req.session.usuarioLogeado})
         }
         else{
-            db.user.update({
-                first_name: req.body.nombre,
-                last_name: req.body.apellido,
-                avatar: (req.file)?req.file.filename:req.session.usuarioLogeado.avatar,
-                phone_number: req.body.telefono,
-                rol_id:1
-            }, {
-                where: {id: req.params.id}
-            })
+            if(req.session.usuarioLogeado.rol_id == 2)
+            {
+                db.user.update({
+                    first_name: req.body.nombre,
+                    last_name: req.body.apellido,
+                    avatar: (req.file)?req.file.filename:req.session.usuarioLogeado.avatar,
+                    phone_number: req.body.telefono,
+                    rol_id:2
+                }, {
+                    where: {id: req.params.id}
+                })
+            }
+            else
+            {
+                db.user.update({
+                    first_name: req.body.nombre,
+                    last_name: req.body.apellido,
+                    avatar: (req.file)?req.file.filename:req.session.usuarioLogeado.avatar,
+                    phone_number: req.body.telefono,
+                    rol_id:1
+                }, {
+                    where: {id: req.params.id}
+                })
+            }
+            
             .then(function(respuestaUpdate)
             {
                 
