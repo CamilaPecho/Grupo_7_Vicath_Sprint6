@@ -181,7 +181,7 @@ main{
     
     .login_desplegable_perfil, .login_desplegable_modificar, .login_desplegable_cerrarSesion{
         display:block;
-        text-align: left;  
+         
     }
     
     .inputCheck /*pa borrar ese feo checkbox*/{

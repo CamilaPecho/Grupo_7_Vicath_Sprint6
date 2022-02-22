@@ -1,8 +1,8 @@
 function adminMiddleware(req, res, next){
     
-    if (req.session.usuarioLogeado){
+    if (req.session.usuarioLogeado.rol_id){
         
-       if(req.session.usuarioLogeado.rol != "admin")
+       if(req.session.usuarioLogeado.rol_id != 2)
        {
            return res.redirect('/');
        } 

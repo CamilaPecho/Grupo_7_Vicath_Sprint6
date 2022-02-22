@@ -6,7 +6,16 @@ const bcript = require('bcryptjs');
 
 const userController = {
     viewLogin: (req,res) =>{
-        res.render('./users/login')
+        db.category.findAll()
+        .then(categories => {
+            res.render('./users/login', {categories})
+        })
+        .catch(err =>
+            {
+                console.log("-----------------------------")
+                console.log(err)
+            })
+        
     },
 
     login: (req,res) =>{
@@ -71,7 +80,16 @@ const userController = {
     },
 
     viewRegister:(req,res)=>{
-        res.render('./users/register')
+        db.category.findAll()
+        .then(categories => {
+            res.render('./users/register', {categories})
+        })
+        .catch(err =>
+            {
+                console.log("-----------------------------")
+                console.log(err)
+            })
+        
     },
 
     register:(req,res)=>{
@@ -120,21 +138,38 @@ const userController = {
         },
 
     verPerfil:(req,res)=>{
+        let categories = db.category.findAll()
+        
         if(req.session.usuarioLogeado.rol_id == 2)
         {
             return res.redirect('/homeAdmin');
         }else{
-            res.render('./users/perfil', {usuarioDatos: req.session.usuarioLogeado});
+            Promise.all([categories])
+            .then(function(categories)
+            {
+                res.render('./users/perfil', {usuarioDatos: req.session.usuarioLogeado, categories}); 
+            })
+            
         }
     },
 
     editVista: (req,res)=>{
-        return res.render('./users/editPerfil', {usuarioDatos: req.session.usuarioLogeado})
+        db.category.findAll()
+        .then(function(categories)
+        {
+            return res.render('./users/editPerfil', {usuarioDatos: req.session.usuarioLogeado, categories})
+        })
+        
     },
 
     editEmailAndPass: (req,res)=>{
-        let idUsuario = req.params.id
-        return res.render('./users/editMailAndPass', {idUsuario})
+        db.category.findAll()
+        .then(function(categories)
+        {
+            let idUsuario = req.params.id
+            return res.render('./users/editMailAndPass', {idUsuario, categories})
+        })
+        
     },
 
     editEmailAndPassPUT: (req,res)=>
@@ -311,10 +346,12 @@ const userController = {
 
         let colores = db.color.findAll()
 
-        Promise.all([destacados,ofertas,novedades,marcas,colores])
-        .then(function([destacados,ofertas,novedades,marcas,colores])
+        let categories =  db.category.findAll();
+
+        Promise.all([destacados,ofertas,novedades,marcas,colores, categories])
+        .then(function([destacados,ofertas,novedades,marcas,colores, categories])
         {
-            return res.render("home", {destacados, ofertas, novedades, marcas, colores})
+            return res.render("home", {destacados, ofertas, novedades, marcas, colores, categories})
         })
         .catch(err => {
             console.log(err)

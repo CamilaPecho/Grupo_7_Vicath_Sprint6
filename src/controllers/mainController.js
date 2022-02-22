@@ -71,13 +71,20 @@ const mainController = {
         let marcas = db.brand.findAll()
 
         let colores = db.color.findAll()
+
+        let categories =  db.category.findAll();
         //////
 
-        Promise.all([destacados,ofertas,novedades,marcas,colores])
-        .then(function([destacados,ofertas,novedades,marcas,colores])
+        Promise.all([destacados,ofertas,novedades,marcas,colores,categories])
+        .then(function([destacados,ofertas,novedades,marcas,colores,categories])
         {
-           
-            return res.render("home", {destacados, ofertas, novedades, marcas, colores})
+            if(req.session.usuarioLogeado && (req.session.usuarioLogeado.rol_id == 2))
+            {
+                return res.redirect('/homeAdmin')
+            }
+            else{
+            return res.render("home", {destacados, ofertas, novedades, marcas, colores, categories})
+            }
         })
         .catch(err => {
             console.log(err)

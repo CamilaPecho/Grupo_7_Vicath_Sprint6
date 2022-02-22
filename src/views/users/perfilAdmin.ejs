@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/30dc2d0760.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/perfil.css">
+    <link rel="stylesheet" href="/css/stylesHeader-Footer.css">
+    
+    <title>Perfil de usuario</title>
+</head>
+<body>
+    <header>
+        <div class="top-header">
+        <div class= "logo">
+            <a href="/" class="contenedorEnlace"><img class="imagen-logo" src="../images/logo.png" alt="Logo de pagina"></a>
+        </div>
+        
+        <div class="iconosHeader">
+        <div class="iconH" id="iconCuenta">
+            <label  for="clickk">
+                <i class="fas fa-user-circle"></i> Administrador
+            </label>
+            <input type="checkbox" class="inputCheck" id="clickk">
+            <div class="login_desplegable">
+                <% if (locals.usuarioHeader) { %>
+                    <span class="login_desplegable_header">¡Hola! <%= locals.datosUsuarioGlobal.first_name %> </span>
+                <a href="/profileAdmin" class="login_desplegable_perfil">Ver perfil</a><hr>
+                <a href="#" class="login_desplegable_edit">Editar perfil</a><hr>
+                <a href="/logout" class="login_desplegable_close">Cerrar cuenta</a>
+                <% } else{%>
+    
+                <span class="login_desplegable_header">¡Elija!</span>
+                <a href="/login" class="login_desplegable_login">Iniciar sesión</a><hr>
+                <a href="/register" class="login_desplegable_signup">Registrate</a>
+                <% } %> 
+            </div>
+        </div>
+        
+        </div>
+        <div class="burger-menu">
+            <i class="fa fa-bars burger"></i>
+        </div>
+        </div>
+        
+    </header>
+    <main>
+        <div class="contenedorFormularioPerfil">
+            <div class="formularioVista">
+              <div class="fondoVista">
+            <p class="parrafoPerfilInicio"><i class="fas fa-user-circle"></i> Perfil del administrador</p>
+            <form action="" class="formularioPerfil">
+                <div class="datosPersonales">
+                  <div class="contenedorCampo"><label for="">Nombre: </label><input type="text" name="" id="" value="<%= usuarioDatos.first_name%>"></div>
+                <div class="contenedorCampo"><label for="">Apellido: </label><input type="text" name="" id="" value="<%= usuarioDatos.last_name%>"></div>
+                <div class="contenedorCampo"><label for="">Telefono: </label><input type="text" name="" id="" value="<%= usuarioDatos.phone_number%>"></div>
+                <div class="contenedorCampo"><label for="">E-mail: </label><input type="text" name="" id="" value="<%= usuarioDatos.email%>"></div>
+                <div class="contenedorBoton">
+                    <button type="button">Editar <i class="fas fa-edit"></i></button>
+                </div>
+                </div>
+                <div class="imagenAvatar">
+                  <img src="/images/users/<%= usuarioDatos.avatar %>" alt="">
+                </div>
+            </form>
+            </div>
+            </div>
+
+            
+        </div>
+    </main>
+    <%- include("../partials/footer") %>
+</body>
+</html>

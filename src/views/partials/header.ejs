@@ -5,6 +5,14 @@
     </div>
     <div class="form-busqueda">
         <form action="/products/busqueda" method="get">
+            <div class="contenedorSelect">
+                <select class="selectBusqueda" name="category">
+                    <option value=''>Seleccione</option> 
+                    <% for( let category of categories ) { %>
+                        <option value='<%=category.id %>'><%=category.name%></option> 
+                    <% } %>
+                </select>
+            </div>
             <input type="text" placeholder="Buscar productos" name="busqueda">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
