@@ -278,7 +278,6 @@ const productController = {
                     images.push(req.files[i].filename)
                 }
             }
-    
             db.product.create({
                 name:req.body.name,
                 price:req.body.price,
@@ -313,6 +312,7 @@ const productController = {
                 res.redirect('/products/viewProducts')
             })
             .catch(error => res.send(error))
+            
         }
        
     },
@@ -357,7 +357,6 @@ const productController = {
                     images.push(req.files[i].filename)
                 }
             }
-    
             db.product.update({
                 name:req.body.name,
                 price:req.body.price,
@@ -396,6 +395,7 @@ const productController = {
                 res.redirect('/products/viewProducts')
             })
             .catch(error => res.send(error))
+            
         }
         
     },
