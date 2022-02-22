@@ -247,32 +247,17 @@ const userController = {
             return res.render('./users/editPerfil', {errors: resultadosValidaciones.mapped(), usuarioDatos: req.session.usuarioLogeado})
         }
         else{
-            if(req.session.usuarioLogeado.rol_id == 2)
-            {
-                db.user.update({
-                    first_name: req.body.nombre,
-                    last_name: req.body.apellido,
-                    avatar: (req.file)?req.file.filename:req.session.usuarioLogeado.avatar,
-                    phone_number: req.body.telefono,
-                    rol_id:2
-                }, {
-                    where: {id: req.params.id}
-                })
-            }
-            else
-            {
-                db.user.update({
-                    first_name: req.body.nombre,
-                    last_name: req.body.apellido,
-                    avatar: (req.file)?req.file.filename:req.session.usuarioLogeado.avatar,
-                    phone_number: req.body.telefono,
-                    rol_id:1
-                }, {
-                    where: {id: req.params.id}
-                })
-            }
             
-            .then(function(respuestaUpdate)
+                db.user.update({
+                    first_name: req.body.nombre,
+                    last_name: req.body.apellido,
+                    avatar: (req.file)?req.file.filename:req.session.usuarioLogeado.avatar,
+                    phone_number: req.body.telefono,
+                    rol_id: (req.session.usuarioLogeado.rol_id == 2) ? 2 : 1
+                }, {
+                    where: {id: req.params.id}
+                })
+                .then(function(respuestaUpdate)
             {
                 
                 //Forzamos a actualizar el session para ver los datos en tiempo real
@@ -298,6 +283,9 @@ const userController = {
                 })
             })
             .catch(error => res.send (error))
+            
+            
+            
         }
     },
 
