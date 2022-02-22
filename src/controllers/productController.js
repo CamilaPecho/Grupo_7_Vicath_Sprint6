@@ -6,7 +6,11 @@ const productController = {
 
     all:(req,res)=>{
         let productos=db.product.findAll({
-            include: [{association: "images"}]
+            include: [{association: "images"}],
+            where:
+            {
+                deleted: 0
+            }
         })
 
         let categories =  db.category.findAll();
@@ -93,35 +97,30 @@ const productController = {
             {
                 association: "brand", 
                 where: {
-                    [Op.and]: [
-                        {
-                            name: {[Op.like]: req.query.marcas}
-                        }
-                    ]
+                        name: {[Op.like]: req.query.marcas}
+                        
                     },
-                required: false
+                required: (req.query.marcas != "") ? true : false
             }, 
             {
                 association: "color",
                 where: {
-                    [Op.and]: [
-                        {
-                            name: {[Op.like]: req.query.colores}
-                        }
-                    ]
+                    
+                        name: {[Op.like]: req.query.colores}
+                     
                 },
-                required: false
+                required: (req.query.colores != "") ? true : false
             }
                     ],
             where: {
                 [Op.and]: [
                     {
                         price: {[Op.gte]: req.query.precio}
+                    },
+                    {
+                        deleted: 0
                     }
                 ]
-            },
-            where:{
-                deleted: 0
             }
         })
 
@@ -143,9 +142,17 @@ const productController = {
     news: (req, res)=>{
         let productos = db.product.findAll({
             where: {
+                [Op.and]: [
+                    {
+                        createdAt: {[Op.gte]: moment().subtract(15, 'days').toDate()}
+                    },
+                    {
+                        deleted: 0
+                    }
+                ]
                 //Lo que hace es a la fecha actual le resta 15
                 //dias y compara con la fecha que esta en el registro, significa que aún es una novedad.
-                createdAt: {[Op.gte]: moment().subtract(15, 'days').toDate()} 
+                 
             },
             include: [
                 {association: "images"}
@@ -167,7 +174,12 @@ const productController = {
     category:(req,res)=>{
         
         let productos = db.product.findAll({
-            include: [{association: "images"},{association: "category"}]
+            include: [{association: "images"},{association: "category"}],
+            where:
+            {
+                deleted: 0
+            }
+            
         })
 
         let categories =  db.category.findAll();
