@@ -290,7 +290,7 @@ const userController = {
     },
 
     verPerfilAdmin: (req,res)=>{
-        res.render('./users/perfilAdmin', {usuarioDatos: req.session.usuarioLogeado});  
+        res.render('./users/profileAdmin', {usuarioDatos: req.session.usuarioLogeado});  
     },
 
     homeAdmin: (req, res) => {

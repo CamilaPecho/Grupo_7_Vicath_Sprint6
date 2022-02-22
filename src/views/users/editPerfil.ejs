@@ -11,7 +11,44 @@
     <link rel="stylesheet" href="/css/stylesRegister.css">
 </head>
 <body>
-    <%- include('../partials/header') %> 
+    <% if (locals.usuarioHeaderAdmin) { %>
+        <header>
+            <div class="top-header">
+            <div class= "logo">
+                <a href="/homeAdmin" class="contenedorEnlace"><img class="imagen-logo" src="../images/logo.png" alt="Logo de pagina"></a>
+            </div>
+            
+            <div class="iconosHeader">
+            <div class="iconH" id="iconCuenta">
+                <label  for="clickk">
+                    <i class="fas fa-user-circle"></i> Administrador
+                </label>
+                <input type="checkbox" class="inputCheck" id="clickk">
+                <div class="login_desplegable">
+                    <% if (locals.usuarioHeader) { %>
+                        <span class="login_desplegable_header">¡Hola! <%= locals.datosUsuarioGlobal.first_name %> </span>
+                    <a href="/profileAdmin" class="login_desplegable_perfil">Ver perfil<i class="fas fa-eye" style="user-select: auto;"></i></a><hr>
+                    <a href="#" class="login_desplegable_edit">Editar perfil<i class="fas fa-shield-alt" style="user-select: auto;"></i></a><hr>
+                    <a href="/logout" class="login_desplegable_close">Cerrar cuenta<i class="fas fa-sign-out-alt"></i></a>
+                    <% } else{%>
+        
+                    <span class="login_desplegable_header">¡Elija!</span>
+                    <a href="/login" class="login_desplegable_login">Iniciar sesión</a><hr>
+                    <a href="/register" class="login_desplegable_signup">Registrate</a>
+                    <% } %> 
+                </div>
+            </div>
+            
+            </div>
+            <div class="burger-menu">
+                <i class="fa fa-bars burger"></i>
+            </div>
+            </div>
+            
+        </header>
+    <% } else { %>
+    <%- include('../partials/header') %>
+    <% } %> 
     <main class="register">
         <div>
         <form action="/edit/<%= usuarioDatos.id %>?_method=PUT" method="POST" class="continuar" enctype="multipart/form-data">
