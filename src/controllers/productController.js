@@ -324,51 +324,68 @@ const productController = {
     
     productEdit:(req,res)=>{
         let images= []
-
-        if(req.files != undefined){
-            for(let i = 0 ; i<req.files.length;i++){
-                images.push(req.files[i].filename)
-            }
-        }
-
-        db.product.update({
-            name:req.body.name,
-            price:req.body.price,
-            description: req.body.description,
-            stock:req.body.stock,
-            stock_min: req.body.stock_min,
-            stock_max: req.body.stock_max,
-            extended_description: req.body.extended_description,
-            price: Number(req.body.price),
-            discount:Number(req.body.discount),
-            category_id: req.body.category,
-            brand_id: req.body.brand,
-            color_id: req.body.color,
-            deleted: 0,
-        },
+        if(req.files.length>4)
         {
-            where: {id:req.params.id}
-        })
-        .then( product =>{
-            if ( images.length != 0){
+            let categories =  db.category.findAll();
+        let brands = db.brand.findAll();
+        let colors = db.color.findAll();
 
-                db.image.destroy(
-                    {
-                        where: { product_id: req.params.id },
-                        force: true
-                    })
-
-                for(let i = 0 ; i<images.length;i++){
-                    db.image.create(
-                    {
-                        name: images[i],
-                        product_id: req.params.id
-                    })
+        Promise.all([categories,brands,colors])
+        .then(function([categories,brands,colors])
+            {
+                return res.render('./products/productAdd',{errors: {
+                    avatar: { msg:"Amigo, te dije que eran 4 imágenes D:" }}
+                , idUsuario: req.params.id, categories,brands,colors})
+            })
+            
+        }
+        else{
+            if(req.files != undefined){
+                for(let i = 0 ; i<req.files.length;i++){
+                    images.push(req.files[i].filename)
                 }
             }
-            res.redirect('/products/viewProducts')
-        })
-        .catch(error => res.send(error))
+    
+            db.product.update({
+                name:req.body.name,
+                price:req.body.price,
+                description: req.body.description,
+                stock:req.body.stock,
+                stock_min: req.body.stock_min,
+                stock_max: req.body.stock_max,
+                extended_description: req.body.extended_description,
+                price: Number(req.body.price),
+                discount:Number(req.body.discount),
+                category_id: req.body.category,
+                brand_id: req.body.brand,
+                color_id: req.body.color,
+                deleted: 0,
+            },
+            {
+                where: {id:req.params.id}
+            })
+            .then( product =>{
+                if ( images.length != 0){
+    
+                    db.image.destroy(
+                        {
+                            where: { product_id: req.params.id },
+                            force: true
+                        })
+    
+                    for(let i = 0 ; i<images.length;i++){
+                        db.image.create(
+                        {
+                            name: images[i],
+                            product_id: req.params.id
+                        })
+                    }
+                }
+                res.redirect('/products/viewProducts')
+            })
+            .catch(error => res.send(error))
+        }
+        
     },
 
     productDetailAdmin:(req, res)=>{

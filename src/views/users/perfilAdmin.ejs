@@ -27,7 +27,7 @@
                 <% if (locals.usuarioHeader) { %>
                     <span class="login_desplegable_header">¡Hola! <%= locals.datosUsuarioGlobal.first_name %> </span>
                 <a href="/profileAdmin" class="login_desplegable_perfil">Ver perfil</a><hr>
-                <a href="#" class="login_desplegable_edit">Editar perfil</a><hr>
+                <a href="/edit/<%= locals.datosUsuarioGlobal.id %> " class="login_desplegable_edit">Editar perfil</a><hr>
                 <a href="/logout" class="login_desplegable_close">Cerrar cuenta</a>
                 <% } else{%>
     
@@ -57,7 +57,7 @@
                 <div class="contenedorCampo"><label for="">Telefono: </label><input type="text" name="" id="" value="<%= usuarioDatos.phone_number%>"></div>
                 <div class="contenedorCampo"><label for="">E-mail: </label><input type="text" name="" id="" value="<%= usuarioDatos.email%>"></div>
                 <div class="contenedorBoton">
-                    <button type="button">Editar <i class="fas fa-edit"></i></button>
+                    <a href="/edit/<%= usuarioDatos.id%>"><button type="button">Editar <i class="fas fa-edit"></i></button></a>
                 </div>
                 </div>
                 <div class="imagenAvatar">

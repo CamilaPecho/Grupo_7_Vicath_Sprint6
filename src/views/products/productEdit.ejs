@@ -12,9 +12,14 @@
                     <input class="dato" type="text" name="name" id="name" value="<%= producto.description %>" required> 
                 </div>
                 <div>
-                    <h4>Imagenes</h4>
+                    <h4>Imágenes (puede seleccionar como máximo 4 imágenes)</h4>
                     <input class="imagen" type="file" name="image" id="image" multiple>  
                 </div>
+                <% if (locals.errors && errors.avatar) { %>
+                    <div class="errorValidacion">
+                        <p><%= errors.avatar.msg %></p>
+                    </div> 
+                <% } %>
                 <div>
                     <h4>Descripcion</h4>
                     <input class="dato" type="text" name="description" id="price" value="<%= producto.description %>" required> 
@@ -84,8 +89,8 @@
                     </div>
                 </div>
                 <div class="botones" >
-                    <button class= "botonCrear" type="submit"> editar </button>
-                    <a href="/products/viewProducts"><button class= "botonCancelar" type="button"> cancelar </button></a>
+                    <button class= "botonCrear" type="submit"> Editar </button>
+                    <a href="/products/viewProducts"><button class= "botonCancelar" type="button"> Cancelar </button></a>
                 </div>
             </form>
         </div>

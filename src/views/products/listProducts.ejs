@@ -68,10 +68,10 @@
                             <td class="datosTabla" id="precio"> <%= producto.price %> </td>
                             <td class="datosTabla" id="categoria"> <%= producto.category.name %> </td>
                             <td class="botonesTabla">
-                                <a href="/products/edit/<%= producto.id %>"> <button class="botonEditar" type="submit"> editar </button></a>
-                                <a href="/products/viewproductDetail/<%= producto.id %>"> <button class="botonEditar" type="submit"> detalle </button></a>
+                                <a href="/products/edit/<%= producto.id %>"> <button class="botonEditar" type="submit"> Editar </button></a>
+                                <a href="/products/viewproductDetail/<%= producto.id %>"> <button class="botonEditar" type="submit"> Detalle </button></a>
                                 <form action="/products/delete/<%= producto.id %>?_method=DELETE" method="POST">
-                                    <button class="botonEliminar" type="submit"> eliminar</button>
+                                    <button class="botonEliminar" type="submit"> Eliminar</button>
                                 </form>
                             </td>
                         </tr>
