@@ -201,7 +201,15 @@ const productController = {
     },
 
     cart: (req,res) =>{
-        res.render("./products/cart");
+        db.category.findAll()
+        .then(function(categories)
+        {
+            return res.render("./products/cart", {categories});
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        
     },
 
     productDetail:(req, res)=>{
@@ -303,10 +311,12 @@ const productController = {
                         })
                     }
                 }else{
-                db.image.create({
-                        name: "default.jpg",
-                        product_id: product.id
-                    })
+                    
+                        db.image.create({
+                            name: "defaultProduct.png",
+                            product_id: product.id
+                        })
+                    
                 }
     
                 res.redirect('/products/viewProducts')

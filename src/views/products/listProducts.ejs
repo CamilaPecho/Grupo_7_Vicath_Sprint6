@@ -19,7 +19,7 @@
                 <% if (locals.usuarioHeader) { %>
                     <span class="login_desplegable_header">¡Hola! <%= locals.datosUsuarioGlobal.first_name %> </span>
                 <a href="/profileAdmin" class="login_desplegable_perfil">Ver perfil<i class="fas fa-eye" style="user-select: auto;"></i></a><hr>
-                <a href="#" class="login_desplegable_edit">Editar perfil<i class="fas fa-shield-alt" style="user-select: auto;"></i></a><hr>
+                <a href="/edit/<%= locals.datosUsuarioGlobal.id %>" class="login_desplegable_edit">Editar perfil<i class="fas fa-shield-alt" style="user-select: auto;"></i></a><hr>
                 <a href="/logout" class="login_desplegable_close">Cerrar cuenta<i class="fas fa-sign-out-alt"></i></a>
                 <% } else{%>
     
