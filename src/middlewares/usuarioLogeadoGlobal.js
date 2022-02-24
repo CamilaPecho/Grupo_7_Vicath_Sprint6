@@ -9,7 +9,6 @@ function usuarioLogeadoGlobal(req, res, next)
     res.locals.usuarioHeader = false; 
     res.locals.usuarioHeaderAdmin = false; 
 
-    console.log("esto si?")
     db.user.findOne({
         where: {
             email: {[Op.like]: usuarioCookie}
@@ -21,13 +20,11 @@ function usuarioLogeadoGlobal(req, res, next)
         req.session.usuarioLogeado = usuarioEncontrado;
     })
     .catch(err =>{
-        console.log("se rompio pa")
+        console.log("holi")
     })
 
-    console.log("codigo procedural")
     if(req.session && req.session.usuarioLogeado)
     {
-        
         res.locals.usuarioHeader = true;
         res.locals.datosUsuarioGlobal = req.session.usuarioLogeado;
         if(req.session.usuarioLogeado.rol_id == 2)

@@ -58,10 +58,9 @@
     <nav>
         <ul>
             <li><a href="/products/novedades">Novedades</a></li>
-            <li><a href="/products/categorias/Oficina">Oficina</a></li>
-            <li><a href="/products/categorias/Universitario">Universitario</a></li>
-            <li><a href="/products/categorias/Escolar">Escolares</a></li>
-            <li><a href="/products/categorias/Artistica">Artistica</a></li>
+            <% for( let category of categories ) { %>
+                <li><a href="/products/categorias/<%=category.id %>"><%=category.name%></a></li>
+            <% } %>
             <li><a href="/products/all">Ver todos</a></li>
         </ul>
     </nav>

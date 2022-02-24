@@ -51,15 +51,10 @@ const mainController = {
 
         let novedades = db.product.findAll({
             where: {
-                //Por si te preguntas, lo que hace es a la fecha actual le resta 15
+                //A la fecha actual le resta 15
                 //dias y compara con la fecha que esta en el registro, si esa
                 //fecha que esta en el registro es mayor a la diferencia que 
                 //hicimos al principio significa que aún es una novedad.
-                //Si fuese menor significa que ya pasó de moda y ya no estaria en 
-                //novedades.
-
-                //Obviamente si creas productos en el mismo instante o dia, todas te van
-                //a aparecer como novedades
                 createdAt: {[Op.gte]: moment().subtract(15, 'days').toDate()},
                 deleted: 0
             },
@@ -68,11 +63,27 @@ const mainController = {
             ]
         })
 
-        let marcas = db.brand.findAll()
+        let marcas = db.brand.findAll({
+            order: [
+                ['name','ASC']
+            ]
+        })
 
-        let colores = db.color.findAll()
+        let colores = db.color.findAll(
+            {
+                order: [
+                    ["name","ASC"]
+                ]
+            }
+        )
 
-        let categories =  db.category.findAll();
+        let categories =  db.category.findAll(
+            {
+                order: [
+                    ["name","ASC"]
+                ]
+            }
+        );
         //////
 
         Promise.all([destacados,ofertas,novedades,marcas,colores,categories])

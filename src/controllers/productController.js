@@ -1,6 +1,7 @@
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 const db = require("../database/models");
 const { Op } = require("sequelize");
+const moment = require("moment")
 
 const productController = {
 
@@ -151,8 +152,7 @@ const productController = {
                     }
                 ]
                 //Lo que hace es a la fecha actual le resta 15
-                //dias y compara con la fecha que esta en el registro, significa que aún es una novedad.
-                 
+                //dias y compara con la fecha que esta en el registro, significa que aún es una novedad
             },
             include: [
                 {association: "images"}
@@ -177,22 +177,22 @@ const productController = {
             include: [{association: "images"},{association: "category"}],
             where:
             {
-                deleted: 0
+                [Op.and]: [
+                    {
+                        category_id: req.params.categoria
+                    },
+                    {
+                        deleted: 0
+                    }
+                ]
             }
-            
         })
 
         let categories =  db.category.findAll();
 
         Promise.all([productos,categories])
-        .then(function([respuesta, categories])
+        .then(function([productos, categories])
         {
-            let productos = respuesta.filter(function(one)
-            {
-                return one.category.name == req.params.categoria
-            }
-            )
-           
             return res.render("./products/results",{productos, categories})
         })
         .catch(err => {
@@ -200,39 +200,7 @@ const productController = {
         })
     },
 
-    cart: (req,res) =>{
-        db.category.findAll()
-        .then(function(categories)
-        {
-            return res.render("./products/cart", {categories});
-        })
-        .catch(err => {
-            console.log(err)
-        })
-        
-    },
-
-    productDetail:(req, res)=>{
-        let detailProd = db.product.findByPk(req.params.id,
-         {
-             include: [{association: "images"}]
-         })
-        
-        let categories =  db.category.findAll();
-
-        Promise.all([detailProd,categories])
-        .then(function([detailProd, categories])
-        {
-         return res.render("./products/productDetail", {detailProd, categories})
-        })
-        .catch(function(error)
-        {
-            console.log(error)
-        })
-         
-     },
-
-     viewProducts:(req,res) =>{
+    viewProducts:(req,res) =>{
         db.product.findAll({
             include: [
                 {association: "category"}
@@ -243,41 +211,78 @@ const productController = {
         })
         .then( products => 
             res.render("./products/listProducts",{products})
-        )
-    },
-
+            )
+        },
+        
     viewProductAdd: (req,res) =>{
-        let categories =  db.category.findAll();
-        let brands = db.brand.findAll();
-        let colors = db.color.findAll();
-
+        let categories =  db.category.findAll(
+                {
+                    order: [
+                        ['name','ASC']
+                ]
+            }
+            );
+        let brands = db.brand.findAll(
+                {
+                    order: [
+                    ['name','ASC']
+                ]
+            }
+            );
+        let colors = db.color.findAll(
+                {
+                    order: [
+                        ['name','ASC']
+                    ]
+                }
+                );
+                
         Promise.all([categories,brands,colors])
         .then(function([categories,brands,colors])
         {
             res.render('./products/productAdd', {brands,categories,colors})           
         })
         .catch(err => {
-             res.send(error)
+            res.send(error)
         })
-
     },
 
     productAdd: (req,res) =>{
         let images= []
         if(req.files.length>4)
         {
-            let categories =  db.category.findAll();
-        let brands = db.brand.findAll();
-        let colors = db.color.findAll();
+            let categories =  db.category.findAll(
+                {
+                    order: [
+                        ['name','ASC']
+                    ]
+                }
+            );
 
-        Promise.all([categories,brands,colors])
-        .then(function([categories,brands,colors])
-            {
-                return res.render('./products/productAdd',{errors: {
-                    avatar: { msg:"Amigo, te dije que eran 4 imágenes D:" }}
-                , idUsuario: req.params.id, categories,brands,colors})
-            })
-            
+            let brands = db.brand.findAll(
+                {
+                    order: [
+                        ['name','ASC']
+                    ]
+                }
+            );
+
+            let colors = db.color.findAll(
+                {
+                    order: [
+                        ['name','ASC']
+                    ]
+                }
+            );
+
+            Promise.all([categories,brands,colors])
+            .then(function([categories,brands,colors])
+                {
+                    return res.render('./products/productAdd',{errors: {
+                        avatar: { msg:"Amigo, te dije que eran 4 imágenes D:" }}
+                    , idUsuario: req.params.id, categories,brands,colors})
+                })
+                
         }
         else
         {
@@ -329,9 +334,29 @@ const productController = {
 
     viewProductEdit:(req,res)=>{
         let product = db.product.findByPk(req.params.id);
-        let categories =  db.category.findAll();
-        let brands = db.brand.findAll();
-        let colors = db.color.findAll();
+        let categories =  db.category.findAll(
+            {
+                order: [
+                    ['name','ASC']
+                ]
+            }
+        );
+
+        let brands = db.brand.findAll(
+            {
+                order: [
+                    ['name','ASC']
+                ]
+            }
+        );
+
+        let colors = db.color.findAll(
+            {
+                order: [
+                    ['name','ASC']
+                ]
+            }
+        );
 
         Promise.all([product,categories,brands,colors])
         .then(function([producto,categories,brands,colors])
@@ -348,18 +373,38 @@ const productController = {
         let images= []
         if(req.files.length>4)
         {
-            let categories =  db.category.findAll();
-        let brands = db.brand.findAll();
-        let colors = db.color.findAll();
+            let categories =  db.category.findAll(
+                {
+                    order: [
+                        ['name','ASC']
+                    ]
+                }
+            );
 
-        Promise.all([categories,brands,colors])
-        .then(function([categories,brands,colors])
-            {
-                return res.render('./products/productAdd',{errors: {
-                    avatar: { msg:"Amigo, te dije que eran 4 imágenes D:" }}
-                , idUsuario: req.params.id, categories,brands,colors})
-            })
-            
+            let brands = db.brand.findAll(
+                {
+                    order: [
+                        ['name','ASC']
+                    ]
+                }
+            );
+
+            let colors = db.color.findAll(
+                {
+                    order: [
+                        ['name','ASC']
+                    ]
+                }
+            );
+
+            Promise.all([categories,brands,colors])
+            .then(function([categories,brands,colors])
+                {
+                    return res.render('./products/productAdd',{errors: {
+                        avatar: { msg:"Amigo, te dije que eran 4 imágenes D:" }}
+                    , idUsuario: req.params.id, categories,brands,colors})
+                })
+                
         }
         else{
             if(req.files != undefined){
@@ -410,6 +455,26 @@ const productController = {
         
     },
 
+    productDetail:(req, res)=>{
+        let detailProd = db.product.findByPk(req.params.id,
+         {
+             include: [{association: "images"}]
+         })
+        
+        let categories =  db.category.findAll();
+
+        Promise.all([detailProd,categories])
+        .then(function([detailProd, categories])
+        {
+         return res.render("./products/productDetail", {detailProd, categories})
+        })
+        .catch(function(error)
+        {
+            console.log(error)
+        })
+         
+    },
+
     productDetailAdmin:(req, res)=>{
         db.product.findByPk(req.params.id,
          {
@@ -436,7 +501,20 @@ const productController = {
         .then( () => {
             res.redirect('/products/viewProducts')
         })
+    },
+    
+    cart: (req,res) =>{
+        db.category.findAll()
+        .then(function(categories)
+        {
+            return res.render("./products/cart", {categories});
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        
     }
+    
 
 }
 
