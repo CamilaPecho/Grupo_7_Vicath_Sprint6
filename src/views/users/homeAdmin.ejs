@@ -48,35 +48,36 @@
         <div class="accionesAdmin">
             <section class="formLogin">
             <div class="saludo">
-                    <a href="#">
-                        <i class="fas fa-user-circle"></i> 
-                    </a>
-                    <h2>¡Bienvenido/a! <%= usuarioDatos.first_name%></h2>
+                <a href="#">
+                    <i class="fas fa-user-circle"></i> 
+                </a>
+                <h2>¡Bienvenido/a <%= usuarioDatos.first_name%>!</h2>
             </div>
-        </section>
-        <p class="acciones">Elija que acción desea realizar:</p>
-        
-            <div class="cont-button">
+            </section>
+            <p class="acciones">Elija que acción desea realizar:</p>
+            <div class="btnGroup">
+               <div class="cont-button">
                 <a href="/products/viewProducts">
                   <button type="button" class="botonHome">Ver listado de productos</button>  
                 </a>
+                </div>
+                <div class="cont-button">
+                    <a href="/products/create">
+                        <button type="button" class="botonHome">Agregar nuevo producto</button>
+                    </a>
+                </div>
+                <div class="cont-button">
+                    <a href="/admin/users">
+                        <button type="button" class="botonHome">Ver tabla usuarios</button>
+                    </a>
+                </div>
+                <div class="cont-button">
+                    <a href="/modocliente">
+                        <button type="button" class="botonHome">Iniciar vista cliente</button>
+                    </a>
+                </div>
             </div>
-            <div class="cont-button">
-                <a href="/products/create">
-                    <button type="button" class="botonHome">Agregar nuevo producto</button>
-                </a>
-            </div>
-            <div class="cont-button">
-                <a href="/admin/users">
-                    <button type="button" class="botonHome">Ver tabla usuarios</button>
-                </a>
-            </div>
-            <div class="cont-button">
-                <a href="/modocliente">
-                    <button type="button" class="botonHome">Iniciar vista cliente</button>
-                </a>
-            </div>
-
+            
         </div>
         
     </main>

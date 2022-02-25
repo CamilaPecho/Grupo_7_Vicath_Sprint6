@@ -3,6 +3,8 @@ const db = require("../database/models");
 const { Op } = require("sequelize");
 const moment = require("moment")
 
+let categories = db.category.findAll();
+
 const productController = {
 
     all:(req,res)=>{
@@ -13,8 +15,6 @@ const productController = {
                 deleted: 0
             }
         })
-
-        let categories =  db.category.findAll();
 
         Promise.all([productos,categories])
         .then(function([productos,categories]){
@@ -80,7 +80,6 @@ const productController = {
             },
             include: [{association: "images"}],
         })
-        let categories =  db.category.findAll();
 
         Promise.all([productos, cantidadTotal, categories])
         .then(function([productos, cantidadTotal, categories])
@@ -125,8 +124,6 @@ const productController = {
             }
         })
 
-        let categories =  db.category.findAll();
-
         Promise.all([productos,categories])
 
         .then(function([productos,categories])
@@ -159,8 +156,6 @@ const productController = {
             ]
         })
 
-        let categories =  db.category.findAll();
-
         Promise.all([productos,categories])
         .then(function([productos,categories])
         {
@@ -188,8 +183,6 @@ const productController = {
             }
         })
 
-        let categories =  db.category.findAll();
-
         Promise.all([productos,categories])
         .then(function([productos, categories])
         {
@@ -215,7 +208,7 @@ const productController = {
         },
         
     viewProductAdd: (req,res) =>{
-        let categories =  db.category.findAll(
+        let categoriesOrder =  db.category.findAll(
                 {
                     order: [
                         ['name','ASC']
@@ -237,7 +230,7 @@ const productController = {
                 }
                 );
                 
-        Promise.all([categories,brands,colors])
+        Promise.all([categoriesOrder,brands,colors])
         .then(function([categories,brands,colors])
         {
             res.render('./products/productAdd', {brands,categories,colors})           
@@ -251,7 +244,7 @@ const productController = {
         let images= []
         if(req.files.length>4)
         {
-            let categories =  db.category.findAll(
+            let categoriesOrder =  db.category.findAll(
                 {
                     order: [
                         ['name','ASC']
@@ -275,7 +268,7 @@ const productController = {
                 }
             );
 
-            Promise.all([categories,brands,colors])
+            Promise.all([categoriesOrder,brands,colors])
             .then(function([categories,brands,colors])
                 {
                     return res.render('./products/productAdd',{errors: {
@@ -334,7 +327,7 @@ const productController = {
 
     viewProductEdit:(req,res)=>{
         let product = db.product.findByPk(req.params.id);
-        let categories =  db.category.findAll(
+        let categoriesOrder =  db.category.findAll(
             {
                 order: [
                     ['name','ASC']
@@ -358,7 +351,7 @@ const productController = {
             }
         );
 
-        Promise.all([product,categories,brands,colors])
+        Promise.all([product,categoriesOrder,brands,colors])
         .then(function([producto,categories,brands,colors])
         {
             res.render('./products/productEdit', {producto,brands,categories,colors})
@@ -373,7 +366,7 @@ const productController = {
         let images= []
         if(req.files.length>4)
         {
-            let categories =  db.category.findAll(
+            let categoriesOrder =  db.category.findAll(
                 {
                     order: [
                         ['name','ASC']
@@ -397,7 +390,7 @@ const productController = {
                 }
             );
 
-            Promise.all([categories,brands,colors])
+            Promise.all([categoriesOrder,brands,colors])
             .then(function([categories,brands,colors])
                 {
                     return res.render('./products/productAdd',{errors: {
@@ -460,8 +453,6 @@ const productController = {
          {
              include: [{association: "images"}]
          })
-        
-        let categories =  db.category.findAll();
 
         Promise.all([detailProd,categories])
         .then(function([detailProd, categories])
@@ -502,7 +493,7 @@ const productController = {
             res.redirect('/products/viewProducts')
         })
     },
-    
+
     cart: (req,res) =>{
         db.category.findAll()
         .then(function(categories)
@@ -515,7 +506,6 @@ const productController = {
         
     }
     
-
 }
 
 module.exports = productController;

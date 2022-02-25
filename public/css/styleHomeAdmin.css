@@ -37,13 +37,11 @@ div.top-header{
 .imagen-logo, .form-busqueda, .cart, .login, .darkmode
 {
     align-self: center;
-    
 }
 
 .cart, .login, .darkmode{
     width: 15%;
 }
-
 
 .iconosHeader {
     display: none;
@@ -73,7 +71,6 @@ div.burger-menu{
     font-size: 60px;;
 }
 /*-------------------MAIN-------------*/
-
 
 main{
     margin-top: 15px;
@@ -110,12 +107,18 @@ main{
     border-radius: 10px;
 }
 
+.btnGroup{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 15px;
+}
+
 .cont-button {
     width: 100%;
-    display: flex;
-    justify-content: center;
     margin-bottom: 12px;
 }
+
 .botonHome {
     width: 100%;
     text-align: center;
@@ -211,12 +214,15 @@ main{
 
 @media (min-width:769px){
 
+    button{
+        cursor: pointer;
+    }
 
     .login_desplegable {
         position: absolute;
         right: -35px;
         box-sizing: border-box;
-        
+        text-align: center;
         opacity: 0;
         width: 186px;
         background-color: white;

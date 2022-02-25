@@ -8,6 +8,7 @@
 main{
     display: flex;
     flex-wrap: wrap;
+    padding: 15px 0px;
 }
 
 /*----------------------FILTRADO----------------------*/
@@ -58,11 +59,17 @@ main section article img{
 
 /*----------------destacados y ofertas------------*/
 
-.destacados, .ofertas, .novedades, .listadoProductos{
+.destacados, .ofertas, .novedades{
     display: flex;
     justify-content: space-around;
     flex-direction: column;
 }
+
+.listadoProductos{
+    display: flex;
+    flex-direction: column;
+}
+
 article.articuloClass{
     width: 90%;
     margin: 5px auto;
@@ -82,12 +89,14 @@ article.articuloClass{
 
 .main-article-principal h4{   
     text-align: left;
-    font-size: 13px;
+    margin: 10px;
 }
+
 .main-article-principal p{
-    margin: 5px;
+    margin: 10px;
     font-size: 12px;
 }
+
 .contenedor-precio {
     display: flex;
     justify-content: space-between;
@@ -103,12 +112,15 @@ article.articuloClass{
     padding: 5px;
 }
 .contenedor-precio button{
+    width: 40%;
     border: 0;
     border-radius: 15px;
     background-color: #FF7070;
     color: #F3F0D7;
     display: flex;
     align-items: center;
+    text-align: center;
+    justify-content: space-evenly;
 }
 
 .contenedor-precio button i
@@ -180,7 +192,7 @@ article.articuloClass{
     border: 1px solid #000;
 }
 
-@media(min-width: 361px) {
+@media(min-width: 426px) {
 
     .productos{
         margin: 3px auto;
@@ -214,11 +226,20 @@ article.articuloClass{
         position: relative;
         /* margin-bottom: 17px; */
         padding-bottom: 40px;
-    }
-     article.articuloClass:hover{
         box-shadow: -4px 4px 2px #B0B8FF;
-        width:33%;
     }
+
+    .listadoProductos .articuloClass{
+        margin: 15px;
+        width: 30%;
+        font-size: 15px;
+        /* border-radius: 128px; */
+        position: relative;
+        /* margin-bottom: 17px; */
+        padding-bottom: 40px;
+        box-shadow: -4px 4px 2px #b0b8ff;
+    }
+    
     .slider{
         display: block;
         width: 100%;
@@ -257,12 +278,19 @@ article.articuloClass{
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-        padding: 9px 13px;
         /* height: 100%; */
         /* transform: translateY(10px); */
     }
 
+    .main-article-principal h4 {
+        text-align: left;
+        margin: 5px;
+    }
 
+    .main-article-principal p {
+        margin: 5px;
+        font-size: 12px;
+    }
 
     /*transicion carrito*/
     .contenedor-precio button:hover i

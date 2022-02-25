@@ -184,7 +184,7 @@ button.enemy{
     text-decoration: none;
 }
 
-/*SELECT A LA IZQUIERDA DE LA BARRA DE BUSQUEDAAAAAA*/
+/*SELECT A LA IZQUIERDA DE LA BARRA DE BUSQUEDA*/
 .selectBusqueda
 {
     background-color: #F3F0D7;
@@ -195,7 +195,8 @@ button.enemy{
 
 .contenedorSelect
 {
-    display: inline;
+    display: none;
+    padding: 0px 15px;
 }
 
 @media(min-width: 426px) {
@@ -276,6 +277,12 @@ input.enemy{
 
 @media (min-width:769px){
 
+    .contenedorSelect{
+        display: block;
+    }
+    .form-busqueda form{
+        display: flex;
+    }
     .form-busqueda button{
         width: 5%;
     }
@@ -301,7 +308,6 @@ input.enemy{
         position: relative;
         cursor: pointer;
         display: flex;
-        
         outline: none; /*Chrome lo agrega :V */
       }
 
